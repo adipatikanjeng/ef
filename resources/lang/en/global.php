@@ -141,6 +141,19 @@ return [
 			'published' => 'Published',
 		],
 	],
+
+	'messages' => [
+		'title' => 'Messages',
+		'created_at' => 'Time',
+		'fields' => [
+			'course' => 'Course',
+			'lesson' => 'Lesson',
+			'title' => 'Title',
+			'description' => 'Description',
+			'questions' => 'Questions',
+			'published' => 'Published',
+		],
+	],
 	'app_create' => 'Create',
 	'app_save' => 'Save',
 	'app_edit' => 'Edit',

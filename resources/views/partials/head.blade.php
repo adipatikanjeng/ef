@@ -7,7 +7,7 @@
       @endif
 
 </title>
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <meta http-equiv="X-UA-Compatible"
       content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0"
@@ -50,3 +50,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.css"/>
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.standalone.min.css"/>
+      <script>
+            window.Laravel = {!! json_encode([
+                'csrfToken' => csrf_token(),
+                'pusherKey' => config('broadcasting.connections.pusher.key'),
+                'pusherCluster' => config('broadcasting.connections.pusher.options.cluster')
+            ]) !!};
+        </script>

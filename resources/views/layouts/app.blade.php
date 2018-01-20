@@ -3,11 +3,12 @@
 
 <head>
     @include('partials.head')
+
 </head>
 
 
 <body class="fix-header">
-
+        <div id="app">
 <div id="wrapper">
 
 @include('partials.topbar')
@@ -60,6 +61,7 @@
     </div>
 </div>
     </div>
+</div>
 </div>
 
 {!! Form::open(['route' => 'auth.logout', 'style' => 'display:none;', 'id' => 'logout']) !!}

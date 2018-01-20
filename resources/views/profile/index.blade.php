@@ -11,20 +11,24 @@
                             <div class="user-content">
                                 <a href="javascript:void(0)"><img src="/images/users/genu.jpg" class="thumb-lg img-circle" alt="img"></a>
                                 <h4 class="text-white">{{ $profile->name }}</h4>
-                                <h5 class="text-white">{{ $profile->email }}</h5> </div>
+                                <h5 class="text-white">{{ $profile->email }}</h5>
+                            </div>
                         </div>
                     </div>
 
                     <div class="user-btm-box">
                         <div class="col-md-4 col-sm-4 text-center">
                             <p class="text-purple"><i class="ti-facebook"></i></p>
-                            <h1>5</h1> </div>
+                            <h1>5</h1>
+                        </div>
                         <div class="col-md-4 col-sm-4 text-center">
                             <p class="text-blue"><i class="ti-twitter"></i></p>
-                            <h1>125</h1> </div>
+                            <h1>125</h1>
+                        </div>
                         <div class="col-md-4 col-sm-4 text-center">
                             <p class="text-danger"><i class="ti-dribbble"></i></p>
-                            <h1>556</h1> </div>
+                            <h1>556</h1>
+                        </div>
                     </div>
                 </div>
             </div>

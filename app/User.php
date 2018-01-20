@@ -4,6 +4,7 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Hash;
+use Cmgmyr\Messenger\Traits\Messagable;
 
 /**
  * Class User
@@ -17,6 +18,7 @@ use Hash;
 class User extends Authenticatable
 {
     use Notifiable;
+    use Messagable;
     protected $fillable = ['name', 'email', 'password', 'remember_token'];
 
 

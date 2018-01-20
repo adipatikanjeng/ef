@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Quick LMS',
+    'name' => 'E Learning',
 
     /*
     |--------------------------------------------------------------------------
@@ -184,7 +184,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
-        
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -248,7 +249,7 @@ return [
         'Image'        => Intervention\Image\Facades\Image::class,
         'Form'         => Collective\Html\FormFacade::class,
         'Html'         => Collective\Html\HtmlFacade::class,
-        
+
     ],
 
 ];
