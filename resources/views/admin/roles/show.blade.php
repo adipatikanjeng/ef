@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.roles.title')</h3>
-
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.app_view')
@@ -28,13 +26,13 @@
                 </div>
             </div><!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-    
+
 <li role="presentation" class="active"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">Users</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-    
+
 <div role="tabpanel" class="tab-pane active" id="users">
 <table class="table table-bordered table-striped {{ count($users) > 0 ? 'datatable' : '' }}">
     <thead>

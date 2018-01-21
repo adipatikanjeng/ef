@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.tests.title')</h3>
 
     <div class="panel panel-default">
         <div class="panel-heading">

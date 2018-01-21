@@ -92,6 +92,12 @@ return [
 		],
 	],
 
+	'posts' => [
+		'title' => 'Posts',
+		'created_at' => 'Time',
+		'back' => 'Back'
+	],
+
 	'lessons' => [
 		'title' => 'Lessons',
 		'created_at' => 'Time',

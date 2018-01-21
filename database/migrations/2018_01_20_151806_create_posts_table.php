@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->text('content');
             $table->string('image')->nullable();
             $table->integer('user_id');
+            $table->string('slug');
             $table->tinyInteger('published')->nullable()->default(0);
             $table->timestamps();
             $table->softDeletes();

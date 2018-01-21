@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.users.title')</h3>
+
     {!! Form::open(['method' => 'POST', 'route' => ['admin.users.store']]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.app_create')
         </div>
-        
+
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
@@ -58,7 +58,7 @@
                     @endif
                 </div>
             </div>
-            
+
         </div>
     </div>
 

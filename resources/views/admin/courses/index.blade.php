@@ -7,18 +7,13 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.app_list')
-            <p>
-                <ul class="list-inline">
-                    <li>
-                        @can('course_create')
-                            <a href="{{ route('admin.courses.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
-                        @endcan
-                    </li>
-                    <li><a class="btn btn-primary btn-sm" href="{{ route('admin.courses.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">All</a></li>
-                    <li><a class="btn btn-warning btn-sm" href="{{ route('admin.courses.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">Trash</a></li>
-                </ul>
-            </p>
-
+            <div class="panel-action">
+                @can('course_create')
+                    <a href="{{ route('admin.courses.create') }}"><i class="mdi mdi-plus-box mdi-24px"></i></a>
+                @endcan
+                <a href="{{ route('admin.courses.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}"><i class="mdi mdi-format-list-bulleted mdi-24px"></i></a>
+                <a href="{{ route('admin.courses.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}"><i class="mdi mdi-delete mdi-24px"></i></a>
+            </div>
         </div>
 
         <div class="panel-body table-responsive">

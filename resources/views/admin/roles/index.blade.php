@@ -2,19 +2,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.roles.title')</h3>
-    @can('role_create')
-    <p>
-        <a href="{{ route('admin.roles.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
-        
-    </p>
-    @endcan
-
-    
 
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.app_list')
+            <div class="panel-action">
+                @can('role_create')
+                    <a href="{{ route('admin.roles.create') }}"><i class="mdi mdi-plus-box mdi-24px"></i></a>
+                @endcan
+                <a href="{{ route('admin.roles.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}"><i class="mdi mdi-format-list-bulleted mdi-24px"></i></a>
+                <a href="{{ route('admin.roles.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}"><i class="mdi mdi-delete mdi-24px"></i></a>
+            </div>
         </div>
 
         <div class="panel-body table-responsive">
@@ -31,7 +29,7 @@
 
                     </tr>
                 </thead>
-                
+
                 <tbody>
                     @if (count($roles) > 0)
                         @foreach ($roles as $role)
@@ -77,7 +75,7 @@
     </div>
 @stop
 
-@section('javascript') 
+@section('javascript')
     <script>
         @can('role_delete')
             window.route_mass_crud_entries_destroy = '{{ route('admin.roles.mass_destroy') }}';

@@ -2,25 +2,19 @@
 @extends('layouts.app')
 
 @section('content')
-    @can('test_create')
-    <p>
-        <a href="{{ route('admin.tests.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
-
-    </p>
-    @endcan
-
-    <p>
-        <ul class="list-inline">
-            <li><a href="{{ route('admin.tests.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">All</a></li> |
-            <li><a href="{{ route('admin.tests.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">Trash</a></li>
-        </ul>
-    </p>
-
 
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.app_list')
+            <div class="panel-action">
+                @can('test_create')
+                    <a href="{{ route('admin.tests.create') }}"><i class="mdi mdi-plus-box mdi-24px"></i></a>
+                @endcan
+                <a href="{{ route('admin.tests.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}"><i class="mdi mdi-format-list-bulleted mdi-24px"></i></a>
+                <a href="{{ route('admin.tests.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}"><i class="mdi mdi-delete mdi-24px"></i></a>
+            </div>
         </div>
+
 
         <div class="panel-body table-responsive">
             <table class="table table-bordered table-striped {{ count($tests) > 0 ? 'datatable' : '' }} @can('test_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">

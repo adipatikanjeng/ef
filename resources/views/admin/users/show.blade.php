@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.users.title')</h3>
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -32,13 +31,13 @@
                 </div>
             </div><!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-    
+
 <li role="presentation" class="active"><a href="#courses" aria-controls="courses" role="tab" data-toggle="tab">Courses</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-    
+
 <div role="tabpanel" class="tab-pane active" id="courses">
 <table class="table table-bordered table-striped {{ count($courses) > 0 ? 'datatable' : '' }}">
     <thead>

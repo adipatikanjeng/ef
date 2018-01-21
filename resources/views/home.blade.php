@@ -3,7 +3,7 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="panel-heading"><a class="btn btn-primary" href="home/create">Create Post</a></div>
+            <div class="panel-heading"><a class="btn btn-primary" href="{{ route('posts.create') }}">Create Post</a></div>
             <div class="steamline">
                 @foreach($posts as $post)
                     <div class="sl-item">
@@ -17,8 +17,8 @@
                                     @endif
                                     <div class="col-md-9 col-xs-12">
                                         <a href="#" class="text-info">{{$post->title}}</a>
-                                        <p> {{ Str::words($post->content, 50, ' ....')}}</p>
-                                        <a href="#"> Read more..</a>
+                                        <p> {!! Str::words($post->content, 50, ' ....')!!}</p>
+                                        <a href="/posts/{{$post->id}}/{{$post->slug}}"> Read more..</a>
                                     </div>
                                 </div>
                             </div>

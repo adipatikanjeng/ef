@@ -2,18 +2,17 @@
 @extends('layouts.app')
 
 @section('content')
-    @can('user_create')
-    <p>
-        <a href="{{ route('admin.users.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
-
-    </p>
+@can('user_create')
     @endcan
-
-
 
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.app_list')
+            <div class="panel-action">
+                    @can('user_create')
+                        <a href="{{ route('admin.users.create') }}"><i class="mdi mdi-plus-box mdi-24px"></i></a>
+                    @endcan
+                </div>
         </div>
 
         <div class="panel-body table-responsive">

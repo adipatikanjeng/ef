@@ -2,19 +2,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.permissions.title')</h3>
-    @can('permission_create')
-    <p>
-        <a href="{{ route('admin.permissions.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
-        
-    </p>
-    @endcan
-
-    
 
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.app_list')
+            <div class="panel-action">
+                @can('permission_create')
+                    <a href="{{ route('admin.permissions.create') }}"><i class="mdi mdi-plus-box mdi-24px"></i></a>
+                @endcan
+                <a href="{{ route('admin.permissions.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}"><i class="mdi mdi-format-list-bulleted mdi-24px"></i></a>
+                <a href="{{ route('admin.permissions.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}"><i class="mdi mdi-delete mdi-24px"></i></a>
+            </div>
         </div>
 
         <div class="panel-body table-responsive">
@@ -30,7 +28,7 @@
 
                     </tr>
                 </thead>
-                
+
                 <tbody>
                     @if (count($permissions) > 0)
                         @foreach ($permissions as $permission)
@@ -71,7 +69,7 @@
     </div>
 @stop
 
-@section('javascript') 
+@section('javascript')
     <script>
         @can('permission_delete')
             window.route_mass_crud_entries_destroy = '{{ route('admin.permissions.mass_destroy') }}';

@@ -1,6 +1,9 @@
 <?php
 Route::get('/', 'GuestController@index');
-Route::get('/home', 'HomeController@index');
+Route::resource('/home', 'HomeController');
+Route::get('posts/create', ['uses' => 'PostsController@create', 'as' => 'posts.create']);
+Route::post('posts/store', ['uses' => 'PostsController@store', 'as' => 'posts.store']);
+Route::get('posts/{id}/{slug}', ['uses' => 'PostsController@show', 'as' => 'posts.show']);
 Route::resource('profile', 'ProfileController');
 Route::get('courses', ['uses' => 'CoursesController@index', 'as' => 'courses.index']);
 Route::get('courses/{slug}', ['uses' => 'CoursesController@show', 'as' => 'courses.show']);
@@ -70,5 +73,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::post('/spatie/media/remove', 'Admin\SpatieMediaController@destroy')->name('media.remove');
 
 });
+
 
 
