@@ -16,7 +16,9 @@
                     <img src="/images/users/varun.jpg" alt="user-img" class="img-circle">
                 </div>
                 <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    {{ auth()->user()->name }}
+                    @if(Auth::check())
+                    {{ Auth::user()->name }}
+                    @endif
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu animated flipInY">

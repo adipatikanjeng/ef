@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Course;
+use Illuminate\Http\Request;
+use App\Post;
 
 class HomeController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
         \View::share('pageTitle', \Lang::get('global.home.title'));
     }
 
@@ -16,18 +18,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $purchased_courses = NULL;
-        if (\Auth::check()) {
-            $purchased_courses = Course::whereHas('students', function($query) {
-                $query->where('id', \Auth::id());
-            })
-            ->with('lessons')
-            ->orderBy('id', 'desc')
-            ->get();
-        }
-        $courses = Course::where('published', 1)->orderBy('id', 'desc')->get();
-        return view('home', compact('courses', 'purchased_courses'));
+        $posts = isset($request->user_id) ? Post::whereUserId($request->user_id) : Post::all();
+        return view('home', compact('posts'));
+    }
+
+    public function create()
+    {
+        return view('home.create');
     }
 }

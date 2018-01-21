@@ -34,7 +34,7 @@
                 <a class="waves-effect waves-light" href="/messages" aria-expanded="false">
                     <i class="mdi mdi-gmail"></i>
                     <div class="notify">
-                        @if(Auth::user()->newThreadsCount())
+                        @if(Auth::check() && Auth::user()->newThreadsCount())
                         <span class="heartbit"></span>
                         <span class="point"></span>
                         @endif
@@ -100,7 +100,11 @@
             <li>
                 <a class="profile-pic" href="#">
                     <img src="/images/users/varun.jpg" alt="user-img" width="36" class="img-circle">
-                    <b class="hidden-xs">{{ auth()->user()->name }}</b>
+                    <b class="hidden-xs">
+                        @if(Auth::check())
+                            {{Auth::user()->name}}
+                        @endif
+                    </b>
                 </a>
             </li>
         </ul>
