@@ -12,8 +12,8 @@
                             <?php $created = \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at)); ?>
                             <div class="m-l-40"> <a href="#" class="text-info">{{$post->user->name}}</a> <span class="sl-date">{{ $created ->diffForHumans(\Carbon\Carbon::now()) }}</span>
                                 <div class="m-t-20 row">
-                                    @if(is_file(public_path('images/'.$post->image)))
-                                        <div class="col-md-2 col-xs-12"><img src="/images/{{$post->image}}" alt="user" class="img-responsive"></div>
+                                    @if(is_file(public_path('uploads/'.$post->image)))
+                                        <div class="col-md-2 col-xs-12"><img src="/uploads/{{$post->image}}" alt="user" class="img-responsive"></div>
                                     @endif
                                     <div class="col-md-9 col-xs-12">
                                         <a href="#" class="text-info">{{$post->title}}</a>
