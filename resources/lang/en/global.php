@@ -42,11 +42,8 @@ return [
 		'title' => 'Classes',
 		'created_at' => 'Time',
 		'fields' => [
-			'name' => 'Name',
-			'email' => 'Email',
-			'password' => 'Password',
-			'role' => 'Role',
-			'remember-token' => 'Remember token',
+			'teacher' => 'Teacher',
+			'students' => 'Student',
 		],
 	],
 

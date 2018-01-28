@@ -49,8 +49,9 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::post('permissions_mass_destroy', ['uses' => 'Admin\PermissionsController@massDestroy', 'as' => 'permissions.mass_destroy']);
     Route::resource('roles', 'Admin\RolesController');
     Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
+    Route::resource('classes', 'Admin\ClassesController');
+    Route::post('classes_mass_destroy', ['uses' => 'Admin\ClassesController@massDestroy', 'as' => 'classes.mass_destroy']);
     Route::resource('users', 'Admin\UsersController');
-    Route::resource('classes', 'Admin\ClassController');
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
     Route::resource('courses', 'Admin\CoursesController');
     Route::post('courses_mass_destroy', ['uses' => 'Admin\CoursesController@massDestroy', 'as' => 'courses.mass_destroy']);

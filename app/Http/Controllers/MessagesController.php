@@ -14,6 +14,7 @@ class MessagesController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
         \View::share('pageTitle', \Lang::get('global.messages.title'));
     }
     /**

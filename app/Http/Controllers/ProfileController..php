@@ -13,6 +13,7 @@ class ProfileController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
         \View::share('pageTitle', \Lang::get('global.profile.title'));
     }
 

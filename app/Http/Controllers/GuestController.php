@@ -13,6 +13,7 @@ class GuestController extends Controller
      */
     public function index()
     {
+        session()->put('url.intended',url()->previous());
         if(!\Auth::check()){
             return view('guest');
         }else{

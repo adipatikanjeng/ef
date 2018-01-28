@@ -38,6 +38,16 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'role_user');
     }
 
+    public function students()
+    {
+        return $this->belongsToMany(\App\User::class, 'classes', 'teacher_user_id', 'student_user_id');
+    }
+
+    public function teachers()
+    {
+        return $this->belongsToMany(\App\User::class, 'classes', 'teacher_user_id', 'student_user_id');
+    }
+
 
     public function isAdmin()
     {
