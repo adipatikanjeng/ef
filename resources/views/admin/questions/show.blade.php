@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.questions.title')</h3>
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -28,14 +27,14 @@
                 </div>
             </div><!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-    
+
 <li role="presentation" class="active"><a href="#questionsoptions" aria-controls="questionsoptions" role="tab" data-toggle="tab">Questions options</a></li>
 <li role="presentation" class=""><a href="#tests" aria-controls="tests" role="tab" data-toggle="tab">Tests</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-    
+
 <div role="tabpanel" class="tab-pane active" id="questionsoptions">
 <table class="table table-bordered table-striped {{ count($questions_options) > 0 ? 'datatable' : '' }}">
     <thead>

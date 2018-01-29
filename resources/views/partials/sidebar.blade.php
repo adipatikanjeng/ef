@@ -59,28 +59,31 @@
                     <span class="hide-menu">@lang('global.courses.title')</span>
                 </a>
             </li>
-            @endcan {{-- @can('lesson_access')
+            @endcan
+            @can('lesson_access')
             <li class="{{ $request->segment(2) == 'lessons' ? 'active' : '' }}">
                 <a class="waves-effect" href="{{ route('admin.lessons.index') }}">
-                    <i class="fa fa-gears"></i>
+                    <i class="mdi mdi-book-open fa-fw"></i>
                     <span class="hide-menu">@lang('global.lessons.title')</span>
                 </a>
             </li>
-            @endcan --}} {{-- @can('question_access')
+            @endcan
+            @can('question_access')
             <li class="{{ $request->segment(2) == 'questions' ? 'active' : '' }}">
                 <a class="waves-effect" href="{{ route('admin.questions.index') }}">
-                    <i class="fa fa-question"></i>
+                    <i class="fa fa-question fa-fw"></i>
                     <span class="hide-menu">@lang('global.questions.title')</span>
                 </a>
             </li>
             @endcan @can('questions_option_access')
             <li class="{{ $request->segment(2) == 'questions_options' ? 'active' : '' }}">
                 <a class="waves-effect" href="{{ route('admin.questions_options.index') }}">
-                    <i class="fa fa-gears"></i>
+                    <i class="fa fa-gears fa-fw"></i>
                     <span class="hide-menu">@lang('global.questions-options.title')</span>
                 </a>
             </li>
-            @endcan --}} @can('test_access')
+            @endcan
+            @can('test_access')
             <li>
                 <a class="waves-effect {{ $request->segment(2) == 'tests' ? 'active' : '' }}" href="{{ route('admin.tests.index') }}">
                     <i class="mdi mdi-border-color fa-fw"></i>
@@ -131,7 +134,7 @@
                     @can('class_access')
                     <li class="{{ $request->segment(2) == 'classes' ? 'active active-sub' : '' }}">
                         <a class="waves-effect" href="{{ route('admin.classes.index') }}">
-                            <i class="mdi mdi-account-multiple fa-fw"></i>
+                            <i class="mdi mdi-account-network fa-fw"></i>
                             <span class="hide-menu">
                                 @lang('global.classes.title')
                             </span>

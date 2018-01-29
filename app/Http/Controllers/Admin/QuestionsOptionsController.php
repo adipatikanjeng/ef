@@ -11,6 +11,10 @@ use App\Http\Requests\Admin\UpdateQuestionsOptionsRequest;
 
 class QuestionsOptionsController extends Controller
 {
+    public function __construct()
+    {
+        \View::share('pageTitle', \Lang::get('global.question-options.title'));
+    }
     /**
      * Display a listing of QuestionsOption.
      *

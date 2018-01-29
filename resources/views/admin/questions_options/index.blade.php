@@ -1,25 +1,18 @@
 @inject('request', 'Illuminate\Http\Request')
 @extends('layouts.app')
 
-@section('content')    
-    @can('questions_option_create')
-    <p>
-        <a href="{{ route('admin.questions_options.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
-        
-    </p>
-    @endcan
-
-    <p>
-        <ul class="list-inline">
-            <li><a href="{{ route('admin.questions_options.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}">All</a></li> |
-            <li><a href="{{ route('admin.questions_options.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}">Trash</a></li>
-        </ul>
-    </p>
-    
+@section('content')
 
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('global.app_list')
+            <div class="panel-action">
+                @can('questions_option_create')
+                    <a href="{{ route('admin.questions_options.create') }}"><i class="mdi mdi-plus-box mdi-24px"></i></a>
+                @endcan
+                <a href="{{ route('admin.questions_options.index') }}" style="{{ request('show_deleted') == 1 ? '' : 'font-weight: 700' }}"><i class="mdi mdi-format-list-bulleted mdi-24px"></i></a>
+                <a href="{{ route('admin.questions_options.index') }}?show_deleted=1" style="{{ request('show_deleted') == 1 ? 'font-weight: 700' : '' }}"><i class="mdi mdi-delete mdi-24px"></i></a>
+            </div>
         </div>
 
         <div class="table-responsive">
@@ -40,7 +33,7 @@
                         @endif
                     </tr>
                 </thead>
-                
+
                 <tbody>
                     @if (count($questions_options) > 0)
                         @foreach ($questions_options as $questions_option)
@@ -101,7 +94,7 @@
     </div>
 @stop
 
-@section('javascript') 
+@section('javascript')
     <script>
         @can('questions_option_delete')
             @if ( request('show_deleted') != 1 ) window.route_mass_crud_entries_destroy = '{{ route('admin.questions_options.mass_destroy') }}'; @endif

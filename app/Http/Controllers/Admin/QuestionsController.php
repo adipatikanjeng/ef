@@ -15,6 +15,11 @@ class QuestionsController extends Controller
 {
     use FileUploadTrait;
 
+    public function __construct()
+    {
+        \View::share('pageTitle', \Lang::get('global.questions.title'));
+    }
+
     /**
      * Display a listing of Question.
      *

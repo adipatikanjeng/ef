@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.questions-options.title')</h3>
-    
+
     {!! Form::model($questions_option, ['method' => 'PUT', 'route' => ['admin.questions_options.update', $questions_option->id]]) !!}
 
     <div class="panel panel-default">
@@ -48,7 +47,7 @@
                     @endif
                 </div>
             </div>
-            
+
         </div>
     </div>
 

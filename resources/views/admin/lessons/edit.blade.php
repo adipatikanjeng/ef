@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.lessons.title')</h3>
-    
+
     {!! Form::model($lesson, ['method' => 'PUT', 'route' => ['admin.lessons.update', $lesson->id], 'files' => true,]) !!}
 
     <div class="panel panel-default">
@@ -145,7 +144,7 @@
                     @endif
                 </div>
             </div>
-            
+
         </div>
     </div>
 

@@ -5,4 +5,7 @@ $(function(){
     $('.nav-tabs a').click(function (e) {
       $(this).tab('show');
     });
+    $('.slimscrollsidebar').slimScroll({
+        height: '100%'
+    });
   });
