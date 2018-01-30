@@ -3,6 +3,7 @@ Route::get('/', 'GuestController@index');
 Route::resource('/home', 'HomeController');
 Route::get('posts/create', ['uses' => 'PostsController@create', 'as' => 'posts.create']);
 Route::post('posts/store', ['uses' => 'PostsController@store', 'as' => 'posts.store']);
+Route::post('posts/store', ['uses' => 'PostCommentsController@store', 'as' => 'post-comments.store']);
 Route::get('posts/{id}/{slug}', ['uses' => 'PostsController@show', 'as' => 'posts.show']);
 Route::get('posts/{id}', ['uses' => 'PostsController@edit', 'as' => 'posts.edit']);
 Route::put('posts/{id}', ['uses' => 'PostsController@update', 'as' => 'posts.update']);
