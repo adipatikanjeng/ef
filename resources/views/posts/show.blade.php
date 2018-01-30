@@ -7,7 +7,15 @@
             <div class="panel-action">
                 @if($post->user_id == auth()->user()->id)
                     <a href="{{ route('posts.edit', [$post->id]) }}"><i class="mdi mdi-pencil-box mdi-24px"></i></a>
-                    <a href="{{ route('posts.delete', [$post->id]) }}"><i class="mdi mdi-delete mdi-24px"></i></a>
+                    @if(Auth::user()->id == $post->user_id)
+                    {!! Form::open(array(
+                        'style' => 'display: inline-block;',
+                        'method' => 'DELETE',
+                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                        'route' => ['posts.delete', $post->id])) !!}
+                        <button class="" type="submit"><i class="mdi mdi-delete mdi-24px"></i></button>
+                    {!! Form::close() !!}
+                    @endif
                 @endif
             </div>
         </div>
@@ -45,49 +53,16 @@
                                     <p class="media-comment">
                                         {{$comment->comment}}
                                     </p>
+                                    @if(Auth::user()->id == $comment->user_id)
+                                    {!! Form::open(array(
+                                        'style' => 'display: inline-block;',
+                                        'method' => 'DELETE',
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
+                                        'route' => ['post-comments.delete', $comment->id])) !!}
+                                    {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::close() !!}
+                                    @endif
                                 </div>
-                            </div>
-                            <div class="collapse" id="replyOne">
-                                <ul class="media-list">
-                                    <li class="media media-replied">
-                                        <a class="pull-left" href="#">
-                                            <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/ManikRathee/128.jpg" alt="profile">
-                                        </a>
-                                        <div class="media-body">
-                                            <div class="well well-lg">
-                                                <h4 class="media-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span> The Hipster</h4>
-                                                <ul class="media-date text-uppercase reviews list-inline">
-                                                <li class="dd">22</li>
-                                                <li class="mm">09</li>
-                                                <li class="aaaa">2014</li>
-                                                </ul>
-                                                <p class="media-comment">
-                                                Nice job Maria.
-                                                </p>
-                                                <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="media media-replied" id="replied">
-                                        <a class="pull-left" href="#">
-                                            <img class="media-object img-circle" src="https://pbs.twimg.com/profile_images/442656111636668417/Q_9oP8iZ.jpeg" alt="profile">
-                                        </a>
-                                        <div class="media-body">
-                                            <div class="well well-lg">
-                                                <h4 class="media-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span> Mary</h4></h4>
-                                                <ul class="media-date text-uppercase reviews list-inline">
-                                                <li class="dd">22</li>
-                                                <li class="mm">09</li>
-                                                <li class="aaaa">2014</li>
-                                                </ul>
-                                                <p class="media-comment">
-                                                Thank you Guys!
-                                                </p>
-                                                <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
                             </div>
                             </li>
                             @endforeach
@@ -103,7 +78,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button class="btn btn-success btn-circle text-uppercase" type="submit"><span class="glyphicon glyphicon-send"></span> Summit comment</button>
+                                    <button class="btn btn-success btn-circle text-uppercase" type="submit"><span class="glyphicon glyphicon-send"></span></button>
                                 </div>
                             </div>
                             <input type="hidden" value="{{$post->id}}" name="post_id" />

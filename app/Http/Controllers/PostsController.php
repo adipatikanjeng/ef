@@ -76,7 +76,9 @@ class PostsController extends Controller
 
     public function delete($id)
     {
-        $post = Post::whereId($id)->delete();
+        $post = Post::whereId($id)->first();
+        $post->delete();
+        $post->comments()->delete();
         return redirect('home');
     }
 }

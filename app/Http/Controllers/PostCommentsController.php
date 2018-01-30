@@ -53,9 +53,9 @@ class PostCommentsController extends Controller
         return redirect()->route('posts.show', [$post->id, $post->slug]);
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
-        $post = Post::whereId($id)->delete();
-        return redirect('home');
+        $post = PostComment::whereId($id)->delete();
+        return redirect()->back();
     }
 }

@@ -54,7 +54,7 @@
                                         'route' => ['admin.questions.restore', $question->id])) !!}
                                     {!! Form::submit(trans('global.app_restore'), array('class' => 'btn btn-xs btn-success')) !!}
                                     {!! Form::close() !!}
-                                                                    {!! Form::open(array(
+                                    {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
