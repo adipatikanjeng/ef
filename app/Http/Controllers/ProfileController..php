@@ -9,13 +9,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUsersRequest;
 use App\Http\Requests\Admin\UpdateUsersRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
+use App\Message;
 
 class ProfileController extends Controller
 {
     use FileUploadTrait;
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
         \View::share('pageTitle', \Lang::get('global.profile.title'));
     }
 
@@ -27,46 +28,11 @@ class ProfileController extends Controller
     public function index()
     {
         $profile = auth()->user();
+        $posts = \App\Post::wherePublished(1)->where('user_id', \Auth::user()->id)->get();
+        $messages = Message::where('user_id', \Auth::user()->id)->get();
 
-        return view('profile.index', compact('profile'));
+        return view('profile.index', compact('profile', 'posts', 'messages'));
     }
-
-    /**
-     * Show the form for creating new User.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        dd("");
-        if (! Gate::allows('user_create')) {
-            return abort(401);
-        }
-        $roles = \App\Role::get()->pluck('title', 'id');
-
-        return view('admin.users.create', compact('roles'));
-    }
-
-    /**
-     * Store a newly created User in storage.
-     *
-     * @param  \App\Http\Requests\StoreUsersRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreUsersRequest $request)
-    {
-        if (! Gate::allows('user_create')) {
-            return abort(401);
-        }
-        $request = $this->saveFiles($request);
-        $user = User::create($request->all());
-        $user->role()->sync(array_filter((array)$request->input('role')));
-
-
-
-        return redirect()->route('admin.users.index');
-    }
-
 
     /**
      * Show the form for editing User.
