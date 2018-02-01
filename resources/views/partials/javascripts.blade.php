@@ -16,8 +16,9 @@
 
 <script src="{{ url('adminlte/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ url('adminlte/plugins/fastclick/fastclick.js') }}"></script>
-<script src="{{ url('adminlte/js/app.min.js') }}"></script>
+<script src="{{ url('adminlte/js/app.js') }}"></script>
 <script src="{{ url('adminlte/js/script.js') }}"></script>
+
 <script>
     window._token = '{{ csrf_token() }}';
 </script>

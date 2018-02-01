@@ -1,7 +1,7 @@
 @inject('request', 'Illuminate\Http\Request')
 <!-- Left side column. contains the sidebar -->
-<div class="navbar-default sidebar" role="navigation">
-    <div class="sidebar-nav slimscrollsidebar">
+<div class="navbar-default sidebar slimscrollsidebar" role="navigation">
+    <div class="sidebar-nav">
         <div class="sidebar-head">
             <h3>
                 <span class="fa-fw open-close">
@@ -13,7 +13,11 @@
         <div class="user-profile">
             <div class="dropdown user-pro-body">
                 <div>
-                    <img src="/images/users/varun.jpg" alt="user-img" class="img-circle">
+                    @if(is_file(public_path('uploads/'.Auth::user()->avatar)))
+                    <img src="/uploads/{{Auth::user()->avatar}}" alt="user-img" class="img-circle">
+                    @else
+                    <img src="/images/users/avatar-default.png" alt="user-img" class="img-circle">
+                    @endif
                 </div>
                 <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     @if(Auth::check())
@@ -27,13 +31,8 @@
                             <i class="ti-user"></i> My Profile</a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/messages">
                             <i class="ti-email"></i> Inbox</a>
-                    </li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <i class="ti-settings"></i> Account Setting</a>
                     </li>
                     <li role="separator" class="divider"></li>
                     <li onclick="$('#logout').submit();">
@@ -44,7 +43,7 @@
             </div>
         </div>
 
-        <ul class="nav in" id="side-menu">
+        <ul class="nav" id="side-menu">
             <li class="{{ $request->segment(1) == 'home' ? 'active' : '' }}">
                 <a class="waves-effect" href="{{ url('/home') }}">
                     <i class="mdi mdi-home fa-fw"></i>
@@ -92,7 +91,7 @@
             </li>
             @endcan
             @can('user_management_access')
-            <li class="treeview">
+            <li class="treeview {{ in_array($request->segment(2), ['permissions', 'roles', 'users']) ? 'active' : '' }}">
                 <a class="waves-effect {{ in_array($request->segment(2), ['permissions', 'roles', 'users']) ? 'active' : '' }}" href="#">
                     <i class="mdi mdi-account-settings-variant fa-fw"></i>
                     <span class="hide-menu"> @lang('global.user-management.title')
@@ -102,7 +101,7 @@
                 <ul class="nav nav-second-level collapse treeview-menu">
 
                     @can('permission_access')
-                    <li>
+                    <li class="{{ $request->segment(2) == 'permissions' ? 'active active-sub' : '' }}">
                         <a class="waves-effect {{ $request->segment(2) == 'permissions' ? 'active active-sub' : '' }}" href="{{ route('admin.permissions.index') }}">
                             <i class="mdi mdi-account-key fa-fw"></i>
                             <span class="hide-menu">
@@ -113,7 +112,7 @@
                     @endcan
                     @can('role_access')
                     <li class="{{ $request->segment(2) == 'roles' ? 'active active-sub' : '' }}">
-                        <a class="waves-effect" href="{{ route('admin.roles.index') }}">
+                        <a class="waves-effect {{ $request->segment(2) == 'roles' ? 'active active-sub' : '' }}" href="{{ route('admin.roles.index') }}">
                             <i class="mdi mdi-account-check fa-fw"></i>
                             <span class="hide-menu">
                                 @lang('global.roles.title')
@@ -123,7 +122,7 @@
                     @endcan
                     @can('user_access')
                     <li class="{{ $request->segment(2) == 'users' ? 'active active-sub' : '' }}">
-                        <a class="waves-effect" href="{{ route('admin.users.index') }}">
+                        <a class="waves-effect {{ $request->segment(2) == 'users' ? 'active active-sub' : '' }}" href="{{ route('admin.users.index') }}">
                             <i class="mdi mdi-account-multiple fa-fw"></i>
                             <span class="hide-menu">
                                 @lang('global.users.title')
@@ -133,7 +132,7 @@
                     @endcan
                     @can('class_access')
                     <li class="{{ $request->segment(2) == 'classes' ? 'active active-sub' : '' }}">
-                        <a class="waves-effect" href="{{ route('admin.classes.index') }}">
+                        <a class="waves-effect {{ $request->segment(2) == 'classes' ? 'active active-sub' : '' }}" href="{{ route('admin.classes.index') }}">
                             <i class="mdi mdi-account-network fa-fw"></i>
                             <span class="hide-menu">
                                 @lang('global.classes.title')

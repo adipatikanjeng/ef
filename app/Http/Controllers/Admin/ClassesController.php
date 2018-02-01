@@ -43,8 +43,8 @@ class ClassesController extends Controller
             return abort(401);
         }
 
-        $teachers = \App\Role::where('id', 2)->first()->roleUser()->pluck('name', 'id');
-        $students = \App\Role::where('id', 3)->first()->roleUser()->pluck('name', 'id');
+        $teachers = \App\Role::where('id', 3)->first()->roleUser()->pluck('name', 'id');
+        $students = \App\Role::where('id', 4)->first()->roleUser()->pluck('name', 'id');
 
         return view('admin.classes.create', compact('students', 'teachers'));
     }

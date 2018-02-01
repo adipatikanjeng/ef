@@ -521,7 +521,7 @@ function _init() {
       } else {
         sidebar.css({
           'position': 'fixed',
-          'height': 'auto'
+          // 'height': 'auto'
         });
       }
     },

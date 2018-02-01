@@ -19,7 +19,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use Messagable;
-    protected $fillable = ['name', 'email', 'password', 'remember_token'];
+    protected $fillable = ['name', 'email', 'password', 'remember_token', 'surname', 'nickname', 'phone_number', 'avatar', 'grade', 'school'];
 
 
     /**
@@ -51,12 +51,12 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role()->where('role_id', 1)->first();
+        return $this->role()->where('role_id', 2)->first();
     }
 
     public function isStudent()
     {
-        return $this->role()->where('role_id', 3)->first();
+        return $this->role()->where('role_id', 4)->first();
     }
 
     public function lessons()

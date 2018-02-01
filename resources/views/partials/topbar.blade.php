@@ -99,7 +99,11 @@
             </li>
             <li>
                 <a class="profile-pic" href="#">
-                    <img src="/images/users/varun.jpg" alt="user-img" width="36" class="img-circle">
+                    @if(is_file(public_path('uploads/'.Auth::user()->avatar)))
+                    <img src="/uploads/{{Auth::user()->avatar}}" alt="user-img" width="36" class="img-circle">
+                    @else
+                    <img src="/images/users/avatar-default.png" alt="user-img" width="36" class="img-circle">
+                    @endif
                     <b class="hidden-xs">
                         @if(Auth::check())
                             {{Auth::user()->name}}

@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUsersRequest;
 use App\Http\Requests\Admin\UpdateUsersRequest;
+use App\Http\Controllers\Traits\FileUploadTrait;
 
 class ProfileController extends Controller
 {
+    use FileUploadTrait;
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         \View::share('pageTitle', \Lang::get('global.profile.title'));
     }
 
@@ -36,6 +38,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
+        dd("");
         if (! Gate::allows('user_create')) {
             return abort(401);
         }
@@ -55,6 +58,7 @@ class ProfileController extends Controller
         if (! Gate::allows('user_create')) {
             return abort(401);
         }
+        $request = $this->saveFiles($request);
         $user = User::create($request->all());
         $user->role()->sync(array_filter((array)$request->input('role')));
 
@@ -89,18 +93,16 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUsersRequest $request, $id)
+    public function update(Request $request, $id)
     {
         if (! Gate::allows('user_edit')) {
             return abort(401);
         }
+        $request = $this->saveFiles($request);
         $user = User::findOrFail($id);
         $user->update($request->all());
-        $user->role()->sync(array_filter((array)$request->input('role')));
 
-
-
-        return redirect()->route('admin.users.index');
+        return redirect()->route('profile.index');
     }
 
 

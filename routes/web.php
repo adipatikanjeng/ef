@@ -9,7 +9,8 @@ Route::get('posts/{id}/{slug}', ['uses' => 'PostsController@show', 'as' => 'post
 Route::get('posts/{id}', ['uses' => 'PostsController@edit', 'as' => 'posts.edit']);
 Route::put('posts/{id}', ['uses' => 'PostsController@update', 'as' => 'posts.update']);
 Route::delete('posts/{id}', ['uses' => 'PostsController@delete', 'as' => 'posts.delete']);
-Route::resource('profile', 'ProfileController');
+Route::get('profile', [ 'uses' => 'ProfileController@index', 'as' => 'profile.index']);
+Route::put('profile/{id}', [ 'uses' => 'ProfileController@update', 'as' => 'profile.update']);
 Route::get('courses', ['uses' => 'CoursesController@index', 'as' => 'courses.index']);
 Route::get('courses/{slug}', ['uses' => 'CoursesController@show', 'as' => 'courses.show']);
 Route::post('courses/payment', ['uses' => 'CoursesController@payment', 'as' => 'courses.payment']);
