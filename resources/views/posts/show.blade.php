@@ -45,7 +45,11 @@
                             @foreach ($post->comments()->get() as $comment)
                             <li class="media">
                             <a class="pull-left" href="#">
-                                <img class="media-object img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
+                                @if(is_file(public_path('uploads/'.$post->user->avatar)))
+                                <img src="/uploads/{{$post->user->avatar}}" alt="user-img" class="media-object img-circle" style="width:40px">
+                                @else
+                                <img src="/images/users/avatar-default.png" alt="user-img" class="media-object img-circle" style="width:40px">
+                                @endif
                             </a>
                             <div class="media-body">
                                 <div class="well well-lg">
