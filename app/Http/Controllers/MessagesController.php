@@ -132,4 +132,19 @@ class MessagesController extends Controller
         }
         return redirect()->route('messages.show', $id);
     }
+
+    public function destroy($id)
+    {
+        try {
+            $thread = Thread::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
+
+            return redirect('messages');
+        }
+
+        $thread->removeParticipant(Auth::id());
+
+        return redirect('profile#messages');
+    }
 }

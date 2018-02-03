@@ -4,6 +4,9 @@
     <div class="panel-heading">
         {{ $thread->subject }}
         <div class="panel-action">
+           {!! Form::open(array( 'style' => 'display: inline-block;', 'method' => 'DELETE', 'onsubmit'
+            => "return confirm('".trans("global.app_are_you_sure")."');", 'route' => ['messages.destroy', $thread->id])) !!}
+            <button class="" type="submit"><i class="mdi mdi-delete mdi-24px"></i></button> {!! Form::close() !!}
         </div>
     </div>
     <div class="panel-body">
