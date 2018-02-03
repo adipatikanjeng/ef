@@ -3,15 +3,18 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Carbon\Carbon;
-use Cmgmyr\Messenger\Models\Message;
+use App\Message;
 use Cmgmyr\Messenger\Models\Participant;
-use Cmgmyr\Messenger\Models\Thread;
+use App\Thread;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Traits\FileUploadTrait;
 class MessagesController extends Controller
 {
+    use FileUploadTrait;
     public function __construct()
     {
         $this->middleware('auth');
@@ -73,20 +76,21 @@ class MessagesController extends Controller
      *
      * @return mixed
      */
-    public function store()
+    public function store(Request $request)
     {
-        $input = Input::all();
-
         $thread = Thread::create([
-            'subject' => $input['subject'],
+            'subject' => $request->subject,
         ]);
         // Message
-        Message::create([
+        $message = Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
-            'body' => $input['message'],
+            'body' => $request->message,
         ]);
-        // Sender
+        if(isset($request->file_name)){
+            $request = $this->saveFiles($request);
+            \App\MessageFile::create(['message_id' => $message->id, 'file_name' => $request->file_name]);
+        }
         Participant::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
@@ -94,7 +98,7 @@ class MessagesController extends Controller
         ]);
         // Recipients
         if (Input::has('recipients')) {
-            $thread->addParticipant($input['recipients']);
+            $thread->addParticipant($request->recipients);
         }
         return redirect('profile#messages');
     }
@@ -104,7 +108,7 @@ class MessagesController extends Controller
      * @param $id
      * @return mixed
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         try {
             $thread = Thread::findOrFail($id);
@@ -114,11 +118,15 @@ class MessagesController extends Controller
         }
         $thread->activateAllParticipants();
         // Message
-        Message::create([
+        $message = Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
             'body' => Input::get('message'),
         ]);
+        if(isset($request->file_name)){
+            $request = $this->saveFiles($request);
+            \App\MessageFile::create(['message_id' => $message->id, 'file_name' => $request->file_name]);
+        }
         // Add replier as a participant
         $participant = Participant::firstOrCreate([
             'thread_id' => $thread->id,

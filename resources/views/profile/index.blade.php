@@ -75,7 +75,6 @@
                                 <div class="panel-body">
                                     <div class="message-center">
                                         @foreach($threads as $thread)
-
                                         <?php $class = $thread->isUnread(Auth::id()) ? 'active' : ''; ?>
                                         <?php $created = \Carbon\Carbon::createFromTimeStamp(strtotime($thread->created_at)); ?>
                                         <a href="{{ route('messages.show', $thread->id)}}" class="{{$class}}">
@@ -88,7 +87,7 @@
                                             </div>
                                             <div class="mail-contnet">
                                                 <h5>{{$thread->creator()->name}}</h5>
-                                                <span class="mail-desc">{{$thread->body}}</span>
+                                                <span class="mail-desc">{{$thread->subject}}</span>
                                                 <span class="time">{{ $created }}</span>
                                             </div>
                                         </a>

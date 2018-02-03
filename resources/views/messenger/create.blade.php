@@ -5,14 +5,18 @@
         Create Message
     </div>
     <div class="panel-body">
-        <form action="{{ route('messages.store') }}" method="post">
+        {!! Form::open(['method' => 'POST', 'route' => ['messages.store'], 'files' => true,]) !!}
             {{ csrf_field() }}
             <div class="form-group">
                 <input type="text" class="form-control" name="subject" placeholder="Subject" value="{{ old('subject') }}" required>
             </div>
             <!-- Message Form Input -->
             <div class="form-group">
-                <textarea name="message" class="form-control">{{ old('message') }}</textarea>
+                <textarea name="message" class="form-control" required>{{ old('message') }}</textarea>
+            </div>
+            Attach File
+            <div class="form-group">
+                <input type="file" class="form-control" name="file_name" placeholder="Add file" value="{{ old('file_name') }}">
             </div>
             Select Recipients
             <div class="form-group">
@@ -23,7 +27,7 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary form-control">Submit</button>
             </div>
-        </form>
+            {!! Form::close() !!}
         <a href="/profile#messages" class="btn btn-default">@lang('global.posts.back')</a>
     </div>
 </div>

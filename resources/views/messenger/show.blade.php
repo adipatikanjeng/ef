@@ -15,7 +15,7 @@
     <div class="panel-footer">
 
     <?php $recipients = $thread->messages->pluck('user_id')->toArray() ?>
-    @include('messenger.partials.form-message',['recipients' => $thread->participants()->pluck('user_id')->toArray()])
+    @include('messenger.partials.form-message',['recipients' => $thread->participants()->where('user_id', '!=', Auth::id())->pluck('user_id')->toArray()])
     <a href="/profile#messages" class="btn btn-default">@lang('global.posts.back')</a>
     </div>
 </div>
