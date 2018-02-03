@@ -31,7 +31,7 @@
                 </form>
             </li>
             <li class="">
-                <a class="waves-effect waves-light" href="/messages" aria-expanded="false">
+                <a class="waves-effect waves-light" href="/profile#messages" aria-expanded="false">
                     <i class="mdi mdi-gmail"></i>
                     <div class="notify">
                         @if(Auth::check() && Auth::user()->newThreadsCount())

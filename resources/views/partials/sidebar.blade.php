@@ -31,7 +31,7 @@
                             <i class="ti-user"></i> My Profile</a>
                     </li>
                     <li>
-                        <a href="/messages">
+                        <a href="/profile#messages">
                             <i class="ti-email"></i> Inbox</a>
                     </li>
                     <li role="separator" class="divider"></li>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUsersRequest;
 use App\Http\Requests\Admin\UpdateUsersRequest;
 use App\Http\Controllers\Traits\FileUploadTrait;
+use Cmgmyr\Messenger\Models\Thread;
 use App\Message;
 
 class ProfileController extends Controller
@@ -29,9 +30,12 @@ class ProfileController extends Controller
     {
         $profile = auth()->user();
         $posts = \App\Post::wherePublished(1)->where('user_id', \Auth::user()->id)->get();
-        $messages = Message::where('user_id', \Auth::user()->id)->get();
 
-        return view('profile.index', compact('profile', 'posts', 'messages'));
+        $threads = Thread::getAllLatest()->whereHas('participants', function ($query) {
+            $query->where('user_id', auth()->user()->id);
+        })->get();
+
+        return view('profile.index', compact('profile', 'posts', 'threads'));
     }
 
     /**

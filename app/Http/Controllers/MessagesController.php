@@ -42,6 +42,10 @@ class MessagesController extends Controller
     {
         try {
             $thread = Thread::findOrFail($id);
+            if(!$thread->participants()->where('user_id',auth()->user()->id)->first()){
+                return abort(401);
+            }
+
         } catch (ModelNotFoundException $e) {
             Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
             return redirect()->route('messages');
@@ -50,7 +54,7 @@ class MessagesController extends Controller
         // $users = User::whereNotIn('id', $thread->participantsUserIds())->get();
         // don't show the current user in list
         $userId = Auth::id();
-        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
+        $users = User::get()->pluck('name','id');
         $thread->markAsRead($userId);
         return view('messenger.show', compact('thread', 'users'));
     }
@@ -61,7 +65,7 @@ class MessagesController extends Controller
      */
     public function create()
     {
-        $users = User::where('id', '!=', Auth::id())->get();
+        $users = User::where('id', '!=', Auth::id())->pluck('name','id');
         return view('messenger.create', compact('users'));
     }
     /**
@@ -72,6 +76,7 @@ class MessagesController extends Controller
     public function store()
     {
         $input = Input::all();
+
         $thread = Thread::create([
             'subject' => $input['subject'],
         ]);
@@ -91,7 +96,7 @@ class MessagesController extends Controller
         if (Input::has('recipients')) {
             $thread->addParticipant($input['recipients']);
         }
-        return redirect()->route('messages');
+        return redirect('profile#messages');
     }
     /**
      * Adds a new message to a current thread.

@@ -1,7 +1,8 @@
 <div class="media">
     <a class="pull-left" href="#">
-        <img src="//www.gravatar.com/avatar/{{ md5($message->user->email) }} ?s=64"
-             alt="{{ $message->user->name }}" class="img-circle">
+        @if(is_file(public_path('uploads/'.$message->user->avatar)))
+        <img src="/uploads/{{$message->user->avatar}}" alt="{{ $message->user->name }}" class="img-circle" style="width:50px"> @else
+        <img src="/images/users/avatar-default.png" alt="{{ $message->user->name }}" class="img-circle" style="width:50px"> @endif
     </a>
     <div class="media-body">
         <h5 class="media-heading">{{ $message->user->name }}</h5>

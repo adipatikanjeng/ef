@@ -3063,7 +3063,15 @@ ul.common li a:hover {
 .message-center a {
     border-bottom: 1px solid rgba(120, 130, 140, .13);
     display: block;
-    padding: 9px 15px
+    padding: 9px 15px;
+
+}
+
+.message-center a.active {
+    border-bottom: 1px solid rgba(120, 130, 140, .13);
+    display: block;
+    padding: 9px 15px;
+    background: #b4d5e4;
 }
 
 .message-center a:hover {

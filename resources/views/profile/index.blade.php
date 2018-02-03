@@ -39,115 +39,125 @@
                         <div class="tab-pane active" id="home">
                             <div class="steamline">
                                 @foreach($posts as $post)
-                                    <div class="sl-item">
-                                        <div class="sl-left">
-                                            @if(is_file(public_path('uploads/'.$post->user->avatar)))
-                                            <img src="/uploads/{{$post->user->avatar}}" alt="user-img" class="img-circle">
-                                            @else
-                                            <img src="/images/users/avatar-default.png" alt="user-img" class="img-circle">
-                                            @endif
-                                         </div>
-                                        <div class="sl-right">
-                                            <?php $created = \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at)); ?>
-                                            <div class="m-l-40"> <a href="#" class="text-info">{{$post->user->name}}</a> <span class="sl-date">{{ $created ->diffForHumans(\Carbon\Carbon::now()) }}</span>
-                                                <div class="m-t-20 row">
-                                                    @if(is_file(public_path('uploads/'.$post->image)))
-                                                        <div class="col-md-2 col-xs-12"><img src="/uploads/{{$post->image}}" alt="user" class="img-responsive"></div>
-                                                    @endif
-                                                    <div class="col-md-9 col-xs-12">
-                                                        <a href="#" class="text-info">{{$post->title}}</a>
-                                                        <p> {!! Str::words($post->content, 50, ' ....')!!}</p>
-                                                        <a href="/posts/{{$post->id}}/{{$post->slug}}"> Read more..</a>
-                                                    </div>
+                                <div class="sl-item">
+                                    <div class="sl-left">
+                                        @if(is_file(public_path('uploads/'.$post->user->avatar)))
+                                        <img src="/uploads/{{$post->user->avatar}}" alt="user-img" class="img-circle"> @else
+                                        <img src="/images/users/avatar-default.png" alt="user-img" class="img-circle"> @endif
+                                    </div>
+                                    <div class="sl-right">
+                                        <?php $created = \Carbon\Carbon::createFromTimeStamp(strtotime($post->created_at)); ?>
+                                        <div class="m-l-40"> <a href="#" class="text-info">{{$post->user->name}}</a> <span class="sl-date">{{ $created ->diffForHumans(\Carbon\Carbon::now()) }}</span>
+                                            <div class="m-t-20 row">
+                                                @if(is_file(public_path('uploads/'.$post->image)))
+                                                <div class="col-md-2 col-xs-12"><img src="/uploads/{{$post->image}}" alt="user" class="img-responsive"></div>
+                                                @endif
+                                                <div class="col-md-9 col-xs-12">
+                                                    <a href="#" class="text-info">{{$post->title}}</a>
+                                                    <p> {!! Str::words($post->content, 50, ' ....')!!}</p>
+                                                    <a href="/posts/{{$post->id}}/{{$post->slug}}"> Read more..</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 @endforeach
                             </div>
                         </div>
                         <div class="tab-pane" id="messages">
-                            <div class="message-center">
-                                @foreach($messages as $message)
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    @lang('global.app_list')
+                                    <div class="panel-action">
+                                        <a href="{{ route('messages.create') }}" alt="Create new"><i class="mdi mdi-message-plus mdi-24px"></i></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="message-center">
+                                        @foreach($threads as $thread)
 
-                                <a href="#">
-                                    <div class="user-img">
-                                        @if(is_file(public_path('uploads/'.$message->user->avatar)))
-                                        <img src="/uploads/{{$message->user->avatar}}" alt="user-img" class="img-circle">
-                                        @else
-                                        <img src="/images/users/avatar-default.png" alt="user-img" class="img-circle">
-                                        @endif
-                                        <span class="profile-status online pull-right"></span>
+                                        <?php $class = $thread->isUnread(Auth::id()) ? 'active' : ''; ?>
+                                        <?php $created = \Carbon\Carbon::createFromTimeStamp(strtotime($thread->created_at)); ?>
+                                        <a href="{{ route('messages.show', $thread->id)}}" class="{{$class}}">
+                                            <div class="user-img">
+                                                @if(is_file(public_path('uploads/'.$thread->creator()->avatar)))
+                                                <img src="/uploads/{{$thread->creator()->avatar}}" alt="user-img" class="img-circle">
+                                                @else
+                                                <img src="/images/users/avatar-default.png" alt="user-img" class="img-circle">
+                                                @endif
+                                            </div>
+                                            <div class="mail-contnet">
+                                                <h5>{{$thread->creator()->name}}</h5>
+                                                <span class="mail-desc">{{$thread->body}}</span>
+                                                <span class="time">{{ $created }}</span>
+                                            </div>
+                                        </a>
+                                        @endforeach
                                     </div>
-                                    <div class="mail-contnet">
-                                        <h5>{{$message->user->name}}</h5>
-                                        <span class="mail-desc">{{$message->body}}</span>
-                                        <span class="time">9:30 AM</span>
-                                    </div>
-                                </a>
-                                @endforeach
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="settings">
-                            {!! Form::model($profile, ['method' => 'PUT', 'route' => ['profile.update', $profile->id], 'files' => true,'class' => 'form-horizontal form-material']) !!}
-                                <div class="form-group">
-                                    <label class="col-md-12">Name</label>
-                                    <div class="col-md-12">
-                                        <input type="text" value="{{ $profile->name }}" name="name" placeholder="Name" class="form-control form-control-line">
-                                    </div>
+                            {!! Form::model($profile, ['method' => 'PUT', 'route' => ['profile.update', $profile->id], 'files' => true,'class' => 'form-horizontal
+                            form-material']) !!}
+                            <div class="form-group">
+                                <label class="col-md-12">Name</label>
+                                <div class="col-md-12">
+                                    <input type="text" value="{{ $profile->name }}" name="name" placeholder="Name" class="form-control form-control-line">
                                 </div>
-                                <div class="form-group">
-                                    <label for="example-email" class="col-md-12">Email</label>
-                                    <div class="col-md-12">
-                                        <input type="email" value="{{ $profile->email }}" disabled   placeholder="Nickname" class="form-control form-control-line"
-                                            name="example-email" id="example-email">                                        </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="example-email" class="col-md-12">Email</label>
+                                <div class="col-md-12">
+                                    <input type="email" value="{{ $profile->email }}" disabled placeholder="Nickname" class="form-control form-control-line"
+                                        name="example-email" id="example-email"> </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Surname</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="surname" value="{{ $profile->surname }}" placeholder="Surname" class="form-control form-control-line">
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Surname</label>
-                                    <div class="col-md-12">
-                                        <input type="text" name="surname" value="{{ $profile->surname }}" placeholder="Surname" class="form-control form-control-line">
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Nickname</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="nickname" value="{{ $profile->nickname }}" placeholder="Nickname" class="form-control form-control-line">
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Nickname</label>
-                                    <div class="col-md-12">
-                                        <input type="text" name="nickname" value="{{ $profile->nickname }}" placeholder="Nickname" class="form-control form-control-line">
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Phone Number</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="phone_number" value="{{ $profile->phone_number }}" placeholder="Phone Number" class="form-control form-control-line">
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Phone Number</label>
-                                    <div class="col-md-12">
-                                        <input type="text" name="phone_number" value="{{ $profile->phone_number }}" placeholder="Phone Number" class="form-control form-control-line">
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Grade (Student Only)</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="grade" value="{{ $profile->grade }}" placeholder="Grade" class="form-control form-control-line">
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Grade (Student Only)</label>
-                                    <div class="col-md-12">
-                                        <input type="text" name="grade" value="{{ $profile->grade }}" placeholder="Grade" class="form-control form-control-line">
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">School (Student Only)</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="school" value="{{ $profile->school }}" placeholder="School" class="form-control form-control-line">
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">School (Student Only)</label>
-                                    <div class="col-md-12">
-                                        <input type="text" name="school" value="{{ $profile->school }}" placeholder="School" class="form-control form-control-line">
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Avatar</label>
+                                <div class="col-md-12">
+                                    <input type="file" name="avatar" value="{{ $profile->avatar }}" class="form-control form-control-line">
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Avatar</label>
-                                    <div class="col-md-12">
-                                        <input type="file" name="avatar" value="{{ $profile->avatar }}" class="form-control form-control-line">
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-success" type="submit">Update Profile</button>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <button class="btn btn-success" type="submit">Update Profile</button>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <a href="/change_password" class="btn btn-primary">Change Password</a>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <a href="/change_password" class="btn btn-primary">Change Password</a>
-                                    </div>
-                                </div>
+                            </div>
                             {!! Form::close() !!}
                         </div>
                     </div>
