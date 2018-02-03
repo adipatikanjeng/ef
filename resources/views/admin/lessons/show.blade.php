@@ -10,7 +10,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <table class="table table-bordered table-striped">
+                    <table class="table ">
                         <tr>
                             <th>@lang('global.lessons.fields.course')</th>
                             <td>{{ $lesson->course->title or '' }}</td>
@@ -67,7 +67,7 @@
 <div class="tab-content">
 
 <div role="tabpanel" class="tab-pane active" id="tests">
-<table class="table table-bordered table-striped {{ count($tests) > 0 ? 'datatable' : '' }}">
+<table class="table  {{ count($tests) > 0 ? 'datatable' : '' }}">
     <thead>
         <tr>
             <th>@lang('global.tests.fields.course')</th>

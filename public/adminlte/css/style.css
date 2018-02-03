@@ -1092,7 +1092,7 @@ pre {
 .navbar-top-links>li>a {
     color: #fff;
     padding: 0 14px;
-    line-height: 60px;
+    line-height: 58px;
     min-height: 60px
 }
 
@@ -1101,7 +1101,8 @@ pre {
 }
 
 .navbar-top-links>li>a:focus {
-    background: rgba(0, 0, 0, 0)
+    background: rgba(0, 0, 0, 0);
+    color: #fff;
 }
 
 .nav .open>a,

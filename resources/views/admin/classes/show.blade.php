@@ -7,7 +7,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
-                <table class="table table-bordered table-striped">
+                <table class="table ">
                     <tr>
                         <th>@lang('global.classes.fields.title')</th>
                         <td>{{ $class->title }}</td>
@@ -29,7 +29,7 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div class="tabpanel" class="tab-pane active" id="users">
-                <table class="table table-bordered table-striped {{ count($users) > 0 ? 'datatable' : '' }}">
+                <table class="table  {{ count($users) > 0 ? 'datatable' : '' }}">
                     <thead>
                         <tr>
                             <th>@lang('global.users.fields.name')</th>

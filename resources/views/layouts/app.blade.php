@@ -8,7 +8,7 @@
 
 
 <body class="fix-header">
-        <div id="app">
+<div id="app">
 <div id="wrapper">
 
 @include('partials.topbar')
@@ -21,10 +21,10 @@
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
             <h4 class="page-title">{{ @$pageTitle }}</h4> </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-            <ol class="breadcrumb">
-                {{--  <li><a href="#">Dashboard</a></li>  --}}
+            {{--  <ol class="breadcrumb">
+                <li><a href="{{ URL::previous() }}">Course</a></li>
                 <li class="active">{{ @$pageTitle }}</li>
-            </ol>
+            </ol>  --}}
         </div>
 
         </div>

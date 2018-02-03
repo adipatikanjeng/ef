@@ -120,19 +120,6 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('free_lesson', 'Free lesson', ['class' => 'control-label']) !!}
-                    {!! Form::hidden('free_lesson', 0) !!}
-                    {!! Form::checkbox('free_lesson', 1, old('free_lesson'), []) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('free_lesson'))
-                        <p class="help-block">
-                            {{ $errors->first('free_lesson') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
                     {!! Form::label('published', 'Published', ['class' => 'control-label']) !!}
                     {!! Form::hidden('published', 0) !!}
                     {!! Form::checkbox('published', 1, old('published'), []) !!}

@@ -17,7 +17,7 @@
 
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($tests) > 0 ? 'datatable' : '' }} @can('test_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
+            <table class="table  {{ count($tests) > 0 ? 'datatable' : '' }} @can('test_delete') @if ( request('show_deleted') != 1 ) dt-select @endif @endcan">
                 <thead>
                     <tr>
                         @can('test_delete')

@@ -16,7 +16,7 @@
         </div>
 
         <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($teachers) > 0 ? 'datatable' : '' }} @can('class_delete') dt-select @endcan">
+            <table class="table  {{ count($teachers) > 0 ? 'datatable' : '' }} @can('class_delete') dt-select @endcan">
                 <thead>
                     <tr>
                         @can('class_delete')

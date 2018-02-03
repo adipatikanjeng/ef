@@ -10,7 +10,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <table class="table table-bordered table-striped">
+                    <table class="table ">
                         <tr>
                             <th>@lang('global.tests.fields.course')</th>
                             <td>{{ $test->course->title or '' }}</td>

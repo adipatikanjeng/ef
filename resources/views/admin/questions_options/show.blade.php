@@ -10,7 +10,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <table class="table table-bordered table-striped">
+                    <table class="table ">
                         <tr>
                             <th>@lang('global.questions-options.fields.question')</th>
                             <td>{{ $questions_option->question->question or '' }}</td>

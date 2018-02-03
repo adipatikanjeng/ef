@@ -61,18 +61,6 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('price', 'Price', ['class' => 'control-label']) !!}
-                    {!! Form::text('price', old('price'), ['class' => 'form-control', 'placeholder' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('price'))
-                        <p class="help-block">
-                            {{ $errors->first('price') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
                     @if ($course->course_image)
                         <a href="{{ asset('uploads/'.$course->course_image) }}" target="_blank"><img src="{{ asset('uploads/thumb/'.$course->course_image) }}"></a>
                     @endif
@@ -85,18 +73,6 @@
                     @if($errors->has('course_image'))
                         <p class="help-block">
                             {{ $errors->first('course_image') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('start_date', 'Start date', ['class' => 'control-label']) !!}
-                    {!! Form::text('start_date', old('start_date'), ['class' => 'form-control date', 'placeholder' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('start_date'))
-                        <p class="help-block">
-                            {{ $errors->first('start_date') }}
                         </p>
                     @endif
                 </div>

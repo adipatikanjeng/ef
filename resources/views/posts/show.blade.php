@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="panel panel-default">
+<div class="panel panel-info">
     <div class="panel-heading">
         {!! $post->title !!}
         <div class="panel-action">
@@ -13,15 +13,13 @@
         </div>
     </div>
     <div class="panel-body">
-        <div class="row">
-            @if(is_file(public_path('uploads/'.$post->image)))
-            <div class="col-md-3">
-                <img style="width:100%" src="/uploads/{!! $post->image !!}">
-            </div>
-            @endif
-            <div class="col">
-                {!! $post->content !!}
-            </div>
+        @if(is_file(public_path('uploads/'.$post->image)))
+        <div class="col-md-3">
+            <img style="width:100%" src="/uploads/{!! $post->image !!}">
+        </div>
+        @endif
+        <div class="col">
+            {!! $post->content !!}
         </div>
     </div>
     <div class="panel-footer">
@@ -41,18 +39,18 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="comments">
                     <ul class="media-list">
-                        @foreach ($post->comments()->get() as $comment)
+                        @foreach ($post->comments()->orderBy('created_at', 'desc')->get() as $comment)
                         <li class="media">
                             <a class="pull-left" href="#">
-                                @if(is_file(public_path('uploads/'.$post->user->avatar)))
-                                <img src="/uploads/{{$post->user->avatar}}" alt="user-img" class="media-object img-circle" style="width:40px">
+                                @if(is_file(public_path('uploads/'.$comment->user->avatar)))
+                                <img src="/uploads/{{$comment->user->avatar}}" alt="user-img" class="media-object img-circle" style="width:40px">
                                 @else
                                 <img src="/images/users/avatar-default.png" alt="user-img" class="media-object img-circle" style="width:40px">
                                 @endif
                             </a>
                             <div class="media-body">
                                 <div class="well well-lg">
-                                    <h4 class="media-heading text-uppercase reviews">{{ $post->user->name }} </h4>
+                                    <h4 class="media-heading text-uppercase reviews">{{ $comment->user->nickname }} </h4>
                                     <p class="media-comment">
                                         {{$comment->comment}}
                                     </p>

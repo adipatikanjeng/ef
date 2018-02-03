@@ -130,17 +130,25 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-12">Grade (Student Only)</label>
+                                <label class="col-md-12">Address</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="address" value="{{ $profile->address }}" placeholder="Address" class="form-control form-control-line">
+                                </div>
+                            </div>
+                            @if(auth()->user()->isStudent())
+                            <div class="form-group">
+                                <label class="col-md-12">Grade</label>
                                 <div class="col-md-12">
                                     <input type="text" name="grade" value="{{ $profile->grade }}" placeholder="Grade" class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-12">School (Student Only)</label>
+                                <label class="col-md-12">School</label>
                                 <div class="col-md-12">
                                     <input type="text" name="school" value="{{ $profile->school }}" placeholder="School" class="form-control form-control-line">
                                 </div>
                             </div>
+                            @endif
                             <div class="form-group">
                                 <label class="col-md-12">Avatar</label>
                                 <div class="col-md-12">

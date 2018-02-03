@@ -36,10 +36,11 @@ body {
 }
 .navbar-header {
   background: #2f323e;
+  /* background: #1f48ec; */
 }
-.navbar-top-links > li > a {
+/* .navbar-top-links > li > a {
   color: #ffffff;
-}
+} */
 .sidebar .sidebar-head {
   background: #ffffff;
 }

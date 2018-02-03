@@ -10,7 +10,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <table class="table table-bordered table-striped">
+                    <table class="table ">
                         <tr>
                             <th>@lang('global.users.fields.name')</th>
                             <td>{{ $user->name }}</td>
@@ -27,6 +27,40 @@
                                 @endforeach
                             </td>
                         </tr>
+                        <tr>
+                            <th>Surname</th>
+                            <td>{{ $user->surname }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nickname</th>
+                            <td>{{ $user->nickname }}</td>
+                        </tr>
+                        <tr>
+                            <th>Phone Number</th>
+                            <td>{{ $user->phone_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td>{{ $user->address }}</td>
+                        </tr>
+                        @if($user->isStudent())
+                        <tr>
+                            <th>Grade</th>
+                            <td>{{ $user->grade }}</td>
+                        </tr>
+                        <tr>
+                            <th>School</th>
+                            <td>{{ $user->school }}</td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <th>Avatar</th>
+                            <td>
+                                @if(is_file(public_path('uploads/'.$user->avatar)))
+                                <img src="/uploads/{{ $user->avatar }}" style="width:100px"/>
+                                @endif
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div><!-- Nav tabs -->
@@ -39,7 +73,7 @@
 <div class="tab-content">
 
 <div role="tabpanel" class="tab-pane active" id="courses">
-<table class="table table-bordered table-striped {{ count($courses) > 0 ? 'datatable' : '' }}">
+<table class="table  {{ count($courses) > 0 ? 'datatable' : '' }}">
     <thead>
         <tr>
             <th>@lang('global.courses.fields.teachers')</th>

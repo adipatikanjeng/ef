@@ -5,11 +5,10 @@
             <a class="logo" href="/">
                 <!-- Logo icon image, you can use font-icon also -->
                 <b>
-                    {{--
                     <!--This is dark logo icon-->
-                    <img src="/images/admin-logo.png" alt="home" class="dark-logo" /> --}} {{--
+                    {{--  <img src="/images/ef.png" alt="home" class="dark-logo" />  --}}
                     <!--This is light logo icon-->
-                    <img src="/images/admin-logo-dark.png" alt="home" class="light-logo" /> --}}
+                    <img src="/images/ef.png" alt="home" class="light-logo little-logo" style="display:none" />
                 </b>
                 <!-- Logo text image you can use text also -->
                 <span class="hidden-xs">
@@ -21,6 +20,13 @@
             </a>
         </div>
         <!-- /Logo -->
+        <ul class="nav navbar-top-links navbar-left">
+            <li>
+                <a href="javascript:void(0)" class="sidebar-toggle" aria-expanded="false">
+                    <i class="ti-menu"></i>
+                </a>
+            </li>
+        </ul>
         <ul class="nav navbar-top-links navbar-right pull-right">
             <li>
                 <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
@@ -40,65 +46,69 @@
                         @endif
                     </div>
                 </a>
-
                 <!-- /.dropdown-messages -->
                 <li class="dropdown">
-                        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-checkbox-blank-circle-outline"></i>
+                    <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-checkbox-blank-circle-outline"></i>
                             <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
                         </a>
-                        <ul class="dropdown-menu dropdown-tasks animated slideInUp">
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p> <strong>Task 1</strong> <span class="pull-right text-muted">40% Complete</span> </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
-                                        </div>
+                    <ul class="dropdown-menu dropdown-tasks animated slideInUp">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p> <strong>Task 1</strong> <span class="pull-right text-muted">40% Complete</span> </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                                            style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
                                     </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p> <strong>Task 2</strong> <span class="pull-right text-muted">20% Complete</span> </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%"> <span class="sr-only">20% Complete</span> </div>
-                                        </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p> <strong>Task 2</strong> <span class="pull-right text-muted">20% Complete</span> </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                        <span class="sr-only">20% Complete</span> </div>
                                     </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p> <strong>Task 3</strong> <span class="pull-right text-muted">60% Complete</span> </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"> <span class="sr-only">60% Complete (warning)</span> </div>
-                                        </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p> <strong>Task 3</strong> <span class="pull-right text-muted">60% Complete</span> </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                            style="width: 60%"> <span class="sr-only">60% Complete (warning)</span> </div>
                                     </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <p> <strong>Task 4</strong> <span class="pull-right text-muted">80% Complete</span> </p>
-                                        <div class="progress progress-striped active">
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"> <span class="sr-only">80% Complete (danger)</span> </div>
-                                        </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p> <strong>Task 4</strong> <span class="pull-right text-muted">80% Complete</span> </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+                                            style="width: 80%"> <span class="sr-only">80% Complete (danger)</span> </div>
                                     </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#"> <strong>See All Tasks</strong> <i class="fa fa-angle-right"></i> </a>
-                            </li>
-                        </ul>
-                    </li>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#"> <strong>See All Tasks</strong> <i class="fa fa-angle-right"></i> </a>
+                        </li>
+                    </ul>
+                </li>
             </li>
             <li>
-                <a class="profile-pic" href="#">
+                <a class="profile-pic waves-effect waves-light dropdown-toggle"
+                <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#">
                     @if(is_file(public_path('uploads/'.Auth::user()->avatar)))
                     <img src="/uploads/{{Auth::user()->avatar}}" alt="user-img" width="36" class="img-circle">
                     @else
@@ -106,10 +116,25 @@
                     @endif
                     <b class="hidden-xs">
                         @if(Auth::check())
-                            {{Auth::user()->name}}
+                            {{Auth::user()->nickname}}
                         @endif
                     </b>
                 </a>
+                <ul class="dropdown-menu animated flipInY">
+                    <li>
+                        <a href="/profile">
+                            <i class="ti-user"></i> My Profile</a>
+                    </li>
+                    <li>
+                        <a href="/profile#messages">
+                            <i class="ti-email"></i> Inbox</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li onclick="$('#logout').submit();">
+                        <a href="#">
+                            <i class="fa fa-power-off"></i> Logout</a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

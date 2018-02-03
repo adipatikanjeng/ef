@@ -19,7 +19,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use Messagable;
-    protected $fillable = ['name', 'email', 'password', 'remember_token', 'surname', 'nickname', 'phone_number', 'avatar', 'grade', 'school'];
+    protected $fillable = ['name', 'email', 'password', 'remember_token', 'surname', 'nickname', 'phone_number', 'avatar', 'grade', 'school', 'address'];
 
 
     /**

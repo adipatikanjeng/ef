@@ -10,7 +10,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <table class="table table-bordered table-striped">
+                    <table class="table ">
                         <tr>
                             <th>@lang('global.questions.fields.question')</th>
                             <td>{!! $question->question !!}</td>
@@ -36,7 +36,7 @@
 <div class="tab-content">
 
 <div role="tabpanel" class="tab-pane active" id="questionsoptions">
-<table class="table table-bordered table-striped {{ count($questions_options) > 0 ? 'datatable' : '' }}">
+<table class="table  {{ count($questions_options) > 0 ? 'datatable' : '' }}">
     <thead>
         <tr>
             <th>@lang('global.questions-options.fields.question')</th>
@@ -104,7 +104,7 @@
 </table>
 </div>
 <div role="tabpanel" class="tab-pane " id="tests">
-<table class="table table-bordered table-striped {{ count($tests) > 0 ? 'datatable' : '' }}">
+<table class="table  {{ count($tests) > 0 ? 'datatable' : '' }}">
     <thead>
         <tr>
             <th>@lang('global.tests.fields.course')</th>

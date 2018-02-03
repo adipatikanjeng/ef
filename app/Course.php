@@ -22,8 +22,8 @@ class Course extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'slug', 'description', 'price', 'course_image', 'start_date', 'published'];
-    
+    protected $fillable = ['title', 'slug', 'description', 'course_image',  'published'];
+
 
     /**
      * Set attribute to money format
@@ -63,7 +63,7 @@ class Course extends Model
             return '';
         }
     }
-    
+
     public function teachers()
     {
         return $this->belongsToMany(User::class, 'course_user');

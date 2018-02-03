@@ -36,6 +36,80 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::label('surname', 'Surname', ['class' => 'control-label']) !!}
+                    {!! Form::text('surname', old('surname'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('surname'))
+                        <p class="help-block">
+                            {{ $errors->first('surname') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('nickname', 'Nickname', ['class' => 'control-label']) !!}
+                    {!! Form::text('nickname', old('nickname'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('nickname'))
+                        <p class="help-block">
+                            {{ $errors->first('nickname') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('phone_number', 'Phone Number*', ['class' => 'control-label']) !!}
+                    {!! Form::text('phone_number', old('phone_number'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('phone_number'))
+                        <p class="help-block">
+                            {{ $errors->first('phone_number') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('address', 'Address*', ['class' => 'control-label']) !!}
+                    {!! Form::text('address', old('address'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('address'))
+                        <p class="help-block">
+                            {{ $errors->first('address') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('grade', 'Grade (Student Only)', ['class' => 'control-label']) !!}
+                    {!! Form::text('grade', old('grade'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('grade'))
+                        <p class="help-block">
+                            {{ $errors->first('grade') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('school', 'School (Student Only)', ['class' => 'control-label']) !!}
+                    {!! Form::text('school', old('school'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('school'))
+                        <p class="help-block">
+                            {{ $errors->first('school') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 form-group">
                     {!! Form::label('password', 'Password*', ['class' => 'control-label']) !!}
                     {!! Form::password('password', ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>

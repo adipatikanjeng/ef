@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class LessonsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        \View::share('pageTitle', \Lang::get('global.lessons.title'));
+    }
 
     public function show($course_id, $lesson_slug)
     {

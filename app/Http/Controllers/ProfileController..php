@@ -39,24 +39,6 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show the form for editing User.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        if (! Gate::allows('user_edit')) {
-            return abort(401);
-        }
-        $roles = \App\Role::get()->pluck('title', 'id');
-
-        $user = User::findOrFail($id);
-
-        return view('admin.users.edit', compact('user', 'roles'));
-    }
-
-    /**
      * Update User in storage.
      *
      * @param  \App\Http\Requests\UpdateUsersRequest  $request
@@ -65,7 +47,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (! Gate::allows('user_edit')) {
+        if (! Gate::allows('profile_edit')) {
             return abort(401);
         }
         $request = $this->saveFiles($request);
@@ -73,65 +55,6 @@ class ProfileController extends Controller
         $user->update($request->all());
 
         return redirect()->route('profile.index');
-    }
-
-
-    /**
-     * Display User.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        if (! Gate::allows('user_view')) {
-            return abort(401);
-        }
-        $roles = \App\Role::get()->pluck('title', 'id');$courses = \App\Course::whereHas('teachers',
-                    function ($query) use ($id) {
-                        $query->where('id', $id);
-                    })->get();
-
-        $user = User::findOrFail($id);
-
-        return view('admin.users.show', compact('user', 'courses'));
-    }
-
-
-    /**
-     * Remove User from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        if (! Gate::allows('user_delete')) {
-            return abort(401);
-        }
-        $user = User::findOrFail($id);
-        $user->delete();
-
-        return redirect()->route('admin.users.index');
-    }
-
-    /**
-     * Delete all selected User at once.
-     *
-     * @param Request $request
-     */
-    public function massDestroy(Request $request)
-    {
-        if (! Gate::allows('user_delete')) {
-            return abort(401);
-        }
-        if ($request->input('ids')) {
-            $entries = User::whereIn('id', $request->input('ids'))->get();
-
-            foreach ($entries as $entry) {
-                $entry->delete();
-            }
-        }
     }
 
 }

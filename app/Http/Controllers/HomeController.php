@@ -20,7 +20,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = isset($request->user_id) ? Post::wherePublished(1)->whereUserId($request->user_id) : Post::wherePublished(1)->get();
+        $posts = Post::wherePublished(1)->orderBy('updated_at', 'desc')->orderBy('created_at', 'desc')->get();
         return view('home', compact('posts'));
     }
 

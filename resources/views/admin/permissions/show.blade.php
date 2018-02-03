@@ -11,7 +11,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <table class="table table-bordered table-striped">
+                    <table class="table ">
                         <tr>
                             <th>@lang('global.permissions.fields.title')</th>
                             <td>{{ $permission->title }}</td>
@@ -20,15 +20,15 @@
                 </div>
             </div><!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-    
+
 <li role="presentation" class="active"><a href="#roles" aria-controls="roles" role="tab" data-toggle="tab">Roles</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-    
+
 <div role="tabpanel" class="tab-pane active" id="roles">
-<table class="table table-bordered table-striped {{ count($roles) > 0 ? 'datatable' : '' }}">
+<table class="table  {{ count($roles) > 0 ? 'datatable' : '' }}">
     <thead>
         <tr>
             <th>@lang('global.roles.fields.title')</th>

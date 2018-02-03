@@ -9,7 +9,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <table class="table table-bordered table-striped">
+                    <table class="table ">
                         <tr>
                             <th>@lang('global.roles.fields.title')</th>
                             <td>{{ $role->title }}</td>
@@ -34,7 +34,7 @@
 <div class="tab-content">
 
 <div role="tabpanel" class="tab-pane active" id="users">
-<table class="table table-bordered table-striped {{ count($users) > 0 ? 'datatable' : '' }}">
+<table class="table  {{ count($users) > 0 ? 'datatable' : '' }}">
     <thead>
         <tr>
             <th>@lang('global.users.fields.name')</th>
