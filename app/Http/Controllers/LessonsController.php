@@ -49,7 +49,7 @@ class LessonsController extends Controller
             $test_exists = TRUE;
         }
 
-        return view('lesson', compact('lesson', 'previous_lesson', 'next_lesson', 'test_result',
+        return view('lessons.index', compact('lesson', 'previous_lesson', 'next_lesson', 'test_result',
             'purchased_course', 'test_exists'));
     }
 

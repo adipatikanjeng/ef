@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-sm-2 col-lg-2 col-md-2">
                 <ul class="nav nav-pills nav-stacked">
-                    @foreach ($lesson->course->publishedLessons as $list_lesson)
+                    @foreach ($lesson->course->publishedLessons()->where('lesson_parent_id', null)->get() as $list_lesson)
                     <li>
                         <a href="{{ route('lessons.show', [$list_lesson->course_id, $list_lesson->slug]) }}" class="list-group-item" @if ($list_lesson->id == $lesson->id) style="font-weight: bold" @endif>{{ $loop->iteration }}. {{ $list_lesson->title }}</a>
                     </li>
@@ -18,12 +18,12 @@
             <div class="col-sm-10 col-lg-10 col-md-10">
                 <h2>{{ $lesson->title }}</h2>
 
-                @if ($purchased_course || $lesson->free_lesson == 1)
+
                 {!! $lesson->full_text !!}
                 <ul class="list-group">
-                    <li class="list-group-item"><a href="">Listening 1</a></li>
-                    <li class="list-group-item">Listening 2</li>
-                    <li class="list-group-item">Listening 3</li>
+                    @foreach($lesson->subLessons as $subLesson)
+                    <li class="list-group-item"><a href="{{ route('lessons.show', [$subLesson->course_id, $subLesson->slug]) }}">{{ $subLesson->title }}</a></li>
+                    @endforeach
                 </ul>
                 @if ($test_exists)
                 <hr />
@@ -42,8 +42,8 @@
                     <input type="submit" value=" Submit results " />
                 </form>
                 @endif
-                <hr /> @endif @else Please <a href="{{ route('courses.show', [$lesson->course->slug]) }}">go back</a> and buy the
-                course. @endif @if ($previous_lesson)
+                <hr /> @endif
+                @if ($previous_lesson)
                 <p>
                     <a href="{{ route('lessons.show', [$previous_lesson->course_id, $previous_lesson->slug]) }}">
                         << {{ $previous_lesson->title }}</a>

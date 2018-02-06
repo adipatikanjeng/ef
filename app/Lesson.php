@@ -60,4 +60,9 @@ class Lesson extends Model implements HasMedia
         return $this->belongsToMany('App\User', 'lesson_student')->withTimestamps();
     }
 
+    public function subLessons()
+    {
+        return $this->hasMany(Lesson::class, 'lesson_parent_id');
+    }
+
 }
