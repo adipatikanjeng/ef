@@ -145,6 +145,22 @@ return [
 		],
 	],
 
+	'test-headers' => [
+		'title' => 'Test Headers',
+		'created_at' => 'Time',
+		'fields' => [
+			'course' => 'Course',
+			'teacher' => 'Teacher',
+			'student' => 'Student',
+			'start-publish-date' => 'Start Publish Date',
+			'end-publish-date' => 'End Publish Date',
+			'title' => 'Title',
+			'time' => 'Time (minutes)',
+			'description' => 'Description',
+			'published' => 'Published',
+		],
+	],
+
 	'messages' => [
 		'title' => 'Messages',
 		'created_at' => 'Time',

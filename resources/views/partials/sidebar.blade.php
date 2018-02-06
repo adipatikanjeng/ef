@@ -1,7 +1,7 @@
 @inject('request', 'Illuminate\Http\Request')
 <!-- Left side column. contains the sidebar -->
-<div class="navbar-default sidebar slimscrollsidebar" role="navigation">
-    <div class="sidebar-nav">
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav slimscrollsidebar">
         <div class="sidebar-head">
             <h3>
                 <span class="fa-fw open-close">
@@ -67,28 +67,59 @@
                 </a>
             </li>
             @endcan
-            @can('question_access')
-            <li class="{{ $request->segment(2) == 'questions' ? 'active' : '' }}">
-                <a class="waves-effect" href="{{ route('admin.questions.index') }}">
-                    <i class="fa fa-question fa-fw"></i>
-                    <span class="hide-menu">@lang('global.questions.title')</span>
-                </a>
-            </li>
-            @endcan @can('questions_option_access')
-            <li class="{{ $request->segment(2) == 'questions_options' ? 'active' : '' }}">
-                <a class="waves-effect" href="{{ route('admin.questions_options.index') }}">
-                    <i class="fa fa-gears fa-fw"></i>
-                    <span class="hide-menu">@lang('global.questions-options.title')</span>
-                </a>
-            </li>
-            @endcan
+
             @can('test_access')
-            <li>
-                <a class="waves-effect {{ $request->segment(2) == 'tests' ? 'active' : '' }}" href="{{ route('admin.tests.index') }}">
+            @if(Auth::user()->isStudent())
+            <li class="{{ in_array($request->segment(2), ['tests']) ? 'active' : '' }}">
+                <a class="waves-effect {{ in_array($request->segment(2), ['tests']) ? 'active' : '' }}" href="{{route('tests.index')}}">
                     <i class="mdi mdi-border-color fa-fw"></i>
                     <span class="hide-menu">@lang('global.tests.title')</span>
                 </a>
             </li>
+            @else
+            <li class="treeview {{ in_array($request->segment(2), ['tests', 'questions', 'questions_options']) ? 'active' : '' }}">
+                <a class="waves-effect {{ in_array($request->segment(2), ['questions', 'questions_options']) ? 'active' : '' }}" href="#">
+                    <i class="mdi mdi-border-color fa-fw"></i>
+                    <span class="hide-menu">@lang('global.tests.title')
+                        <span class="fa arrow"></span>
+                    </span>
+                </a>
+                <ul class="nav nav-second-level collapse treeview-menu">
+                    @can('test_header_access')
+                    <li class="{{ $request->segment(2) == 'test_headers' ? 'active' : '' }}">
+                        <a class="waves-effect {{ $request->segment(2) == 'test_headers' ? 'active' : '' }}" href="{{ route('admin.test_headers.index') }}">
+                            <i class="mdi mdi-format-header-1 fa-fw"></i>
+                            <span class="hide-menu">@lang('global.test-headers.title')</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('test_access')
+                    <li class="{{ $request->segment(2) == 'tests' ? 'active' : '' }}">
+                        <a class="waves-effect {{ $request->segment(2) == 'tests' ? 'active' : '' }}" href="{{ route('admin.tests.index') }}">
+                            <i class="mdi mdi-format-title fa-fw"></i>
+                            <span class="hide-menu">@lang('global.tests.title')</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('question_access')
+                    <li class="{{ $request->segment(2) == 'questions' ? 'active' : '' }}">
+                        <a class="waves-effect {{ $request->segment(2) == 'questions' ? 'active' : '' }}" href="{{ route('admin.questions.index') }}">
+                            <i class="fa fa-question fa-fw"></i>
+                            <span class="hide-menu">@lang('global.questions.title')</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('questions_option_access')
+                    <li class="{{ $request->segment(2) == 'questions_options' ? 'active' : '' }}">
+                        <a class="waves-effect {{ $request->segment(2) == 'questions_options' ? 'active' : '' }}" href="{{ route('admin.questions_options.index') }}">
+                            <i class="mdi mdi-alphabetical fa-fw"></i>
+                            <span class="hide-menu">@lang('global.questions-options.title')</span>
+                        </a>
+                    </li>
+                    @endcan
+                </ul>
+            </li>
+            @endif
             @endcan
             @can('user_management_access')
             <li class="treeview {{ in_array($request->segment(2), ['permissions', 'roles', 'users']) ? 'active' : '' }}">

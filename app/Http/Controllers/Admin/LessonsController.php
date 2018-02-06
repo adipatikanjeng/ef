@@ -58,8 +58,9 @@ class LessonsController extends Controller
             return abort(401);
         }
         $courses = \App\Course::ofTeacher()->get()->pluck('title', 'id')->prepend('Please select', '');
+        $lessons = Lesson::whereIn('course_id', Course::ofTeacher()->pluck('id'))->pluck('title', 'id');
 
-        return view('admin.lessons.create', compact('courses'));
+        return view('admin.lessons.create', compact('courses', 'lessons'));
     }
 
     /**
@@ -100,10 +101,10 @@ class LessonsController extends Controller
             return abort(401);
         }
         $courses = \App\Course::ofTeacher()->get()->pluck('title', 'id')->prepend('Please select', '');
-
+        $lessons = Lesson::whereIn('course_id', Course::ofTeacher()->pluck('id'))->pluck('title', 'id');
         $lesson = Lesson::findOrFail($id);
 
-        return view('admin.lessons.edit', compact('lesson', 'courses'));
+        return view('admin.lessons.edit', compact('lesson', 'courses', 'lessons'));
     }
 
     /**

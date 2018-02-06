@@ -33,6 +33,18 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('course_id', 'Course*', ['class' => 'control-label']) !!}
+                    {!! Form::select('course_id', $courses, old('course_id'), ['class' => 'form-control select2', 'placeholder' => '', 'required' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('course_id'))
+                        <p class="help-block">
+                            {{ $errors->first('course_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
 
         </div>
     </div>

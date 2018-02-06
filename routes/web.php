@@ -15,6 +15,8 @@ Route::get('courses', ['uses' => 'CoursesController@index', 'as' => 'courses.ind
 Route::get('courses/{slug}', ['uses' => 'CoursesController@show', 'as' => 'courses.show']);
 Route::post('courses/payment', ['uses' => 'CoursesController@payment', 'as' => 'courses.payment']);
 Route::post('courses/{course_id}/rating', ['uses' => 'CoursesController@rating', 'as' => 'courses.rating']);
+Route::get('tests', ['uses' => 'TestsController@index', 'as' => 'tests.index']);
+Route::get('tests/{id}', ['uses' => 'TestsController@show', 'as' => 'tests.show']);
 
 Route::get('lesson/{course_id}/{slug}', ['uses' => 'LessonsController@show', 'as' => 'lessons.show']);
 Route::post('lesson/{slug}/test', ['uses' => 'LessonsController@test', 'as' => 'lessons.test']);
@@ -75,7 +77,11 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::resource('tests', 'Admin\TestsController');
     Route::post('tests_mass_destroy', ['uses' => 'Admin\TestsController@massDestroy', 'as' => 'tests.mass_destroy']);
     Route::post('tests_restore/{id}', ['uses' => 'Admin\TestsController@restore', 'as' => 'tests.restore']);
-    Route::delete('tests_perma_del/{id}', ['uses' => 'Admin\TestsController@perma_del', 'as' => 'tests.perma_del']);
+    Route::delete('tests_perma_del/{id}', ['uses' => 'Admin\TestHeadersController@perma_del', 'as' => 'tests.perma_del']);
+    Route::resource('test_headers', 'Admin\TestHeadersController');
+    Route::post('test_headers_mass_destroy', ['uses' => 'Admin\TestHeadersController@massDestroy', 'as' => 'test_headers.mass_destroy']);
+    Route::post('test_headers_restore/{id}', ['uses' => 'Admin\TestHeadersController@restore', 'as' => 'test_headers.restore']);
+    Route::delete('test_headers_perma_del/{id}', ['uses' => 'Admin\TestHeadersController@perma_del', 'as' => 'test_headers.perma_del']);
     Route::post('/spatie/media/upload', 'Admin\SpatieMediaController@create')->name('media.upload');
     Route::post('/spatie/media/remove', 'Admin\SpatieMediaController@destroy')->name('media.remove');
 

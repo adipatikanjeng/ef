@@ -6,7 +6,8 @@
     $('.nav-tabs a').click(function (e) {
       $(this).tab('show');
     });
-    $('.slimscrollsidebar').removeAttr('style');
+
+    // $('.slimscrollsidebar').removeAttr('style');
     $('.sidebar-toggle').on('click', function(){
       if($('body').hasClass( "hide-sidebar" )){
         $('body').removeClass('hide-sidebar')
@@ -84,13 +85,14 @@
             $("ul.theme_color").toggleClass("theme_block")
         }), $(".collapseble").on("click", function() {
             $(".collapseblebox").fadeToggle(350)
-        }), $(".slimscrollright").slimScroll({
+        }),
+        $(".slimscrollright").slimScroll({
             height: "100%",
             position: "right",
             size: "5px",
             color: "#dcdcdc"
         }), $(".slimscrollsidebar").slimScroll({
-            height: "100%",
+            height: "600px",
             position: "right",
             size: "6px",
             color: "rgba(0,0,0,0.3)"
@@ -99,7 +101,8 @@
             position: "right",
             size: "0px",
             color: "#dcdcdc"
-        }), e.trigger("resize"), $(".visited li a").on("click", function(e) {
+        }),
+         e.trigger("resize"), $(".visited li a").on("click", function(e) {
             $(".visited li").removeClass("active");
             var i = $(this).parent();
             i.hasClass("active") || i.addClass("active"), e.preventDefault()
@@ -108,4 +111,12 @@
         }), $(".navbar-toggle").on("click", function() {
             $(".navbar-toggle i").toggleClass("ti-menu").addClass("ti-close")
         })
+
+        $(document).on("click","#left ul.nav li.parent > a > span.sign", function(){
+            $(this).find('i:first').toggleClass("icon-minus");
+        });
+
+        // Open Le current menu
+        $("#left ul.nav li.parent.active > a > span.sign").find('i:first').addClass("icon-minus");
+        $("#left ul.nav li.current").parents('ul.children').addClass("in");
 });

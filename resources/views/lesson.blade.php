@@ -7,14 +7,25 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-2 col-lg-2 col-md-2">
-                <div class="list-group">
+                <ul class="nav nav-pills nav-stacked">
                     @foreach ($lesson->course->publishedLessons as $list_lesson)
-                    <a href="{{ route('lessons.show', [$list_lesson->course_id, $list_lesson->slug]) }}" class="list-group-item" @if ($list_lesson->id == $lesson->id) style="font-weight: bold" @endif>{{ $loop->iteration }}. {{ $list_lesson->title }}</a>                    @endforeach
-                </div>
+                    <li>
+                        <a href="{{ route('lessons.show', [$list_lesson->course_id, $list_lesson->slug]) }}" class="list-group-item" @if ($list_lesson->id == $lesson->id) style="font-weight: bold" @endif>{{ $loop->iteration }}. {{ $list_lesson->title }}</a>
+                    </li>
+                    @endforeach
+                </ul>
             </div>
             <div class="col-sm-10 col-lg-10 col-md-10">
                 <h2>{{ $lesson->title }}</h2>
-                @if ($purchased_course || $lesson->free_lesson == 1) {!! $lesson->full_text !!} @if ($test_exists)
+
+                @if ($purchased_course || $lesson->free_lesson == 1)
+                {!! $lesson->full_text !!}
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="">Listening 1</a></li>
+                    <li class="list-group-item">Listening 2</li>
+                    <li class="list-group-item">Listening 3</li>
+                </ul>
+                @if ($test_exists)
                 <hr />
                 <h3>Test: {{ $lesson->test->title }}</h3>
                 @if (!is_null($test_result))
@@ -43,7 +54,7 @@
             </div>
         </div>
         <div class="panel-footer">
-                <a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
+            <a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
         </div>
     </div>
 </div>

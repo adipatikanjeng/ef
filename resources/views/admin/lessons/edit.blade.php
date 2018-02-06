@@ -24,6 +24,18 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::label('lesson_parent_id', 'Lesson Parent (Create sub lesson)', ['class' => 'control-label']) !!}
+                    {!! Form::select('lesson_parent_id', $lessons, old('lesson_parent_id'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('lesson_parent_id'))
+                        <p class="help-block">
+                            {{ $errors->first('lesson_parent_id') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
                     {!! Form::label('title', 'Title*', ['class' => 'control-label']) !!}
                     {!! Form::text('title', old('title'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>

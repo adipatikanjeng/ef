@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClassesTable extends Migration
+class CreateTestHeadersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,16 +14,17 @@ class CreateClassesTable extends Migration
     public function up()
     {
 
-        Schema::create('classes', function (Blueprint $table) {
+        Schema::create('test_headers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_user_id')->unsigned();
-            $table->integer('teacher_user_id')->unsigned();
             $table->integer('course_id')->unsigned();
-            $table->integer('test_score')->nullable();
-            $table->text('teacher_notes')->nullable();
-            $table->string('class_code');
-            $table->timestamps();
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('time');
+            $table->datetime('start_publish_date');
+            $table->datetime('end_publish_date');
+            $table->integer('published');
             $table->softDeletes();
+            $table->timestamps();
         });
 
     }
@@ -35,6 +36,6 @@ class CreateClassesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classes');
+        Schema::dropIfExists('test_headers');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use App\Classes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -26,10 +27,11 @@ class ClassesController extends Controller
         if (! Gate::allows('class_access')) {
             return abort(401);
         }
+        $classTeacherUserIds = Classes::groupBy('teacher_user_id');
+        dd($classTeacherUserIds);
+        $teachers = \App\User::whereIn('id', $classTeacherUserIds)->get();
 
-        $teachers = \App\Role::where('id', '2')->first()->roleUser()->get();
-
-        return view('admin.classes.index', compact('teachers'));
+        return view('admin.classes.index', compact('teachers', 'classes'));
     }
 
     /**
@@ -45,8 +47,9 @@ class ClassesController extends Controller
 
         $teachers = \App\Role::where('id', 3)->first()->roleUser()->pluck('name', 'id');
         $students = \App\Role::where('id', 4)->first()->roleUser()->pluck('name', 'id');
+        $courses = \App\Course::wherePublished(1)->get()->pluck('title', 'id');
 
-        return view('admin.classes.create', compact('students', 'teachers'));
+        return view('admin.classes.create', compact('students', 'teachers', 'courses'));
     }
 
     /**
@@ -60,13 +63,14 @@ class ClassesController extends Controller
         if (! Gate::allows('class_create')) {
             return abort(401);
         }
-
+        $classCode = $this->classCode('EF');
         foreach ($request->student_user_id as $key => $value) {
             $model = new Classes;
             $model->teacher_user_id = $request->teacher_user_id;
             $model->student_user_id = $value;
+            $model->course_id = $request->course_id;
+            $model->class_code = $classCode;
             $model->save();
-
         }
 
 
@@ -85,12 +89,14 @@ class ClassesController extends Controller
         if (! Gate::allows('class_edit')) {
             return abort(401);
         }
+        $teacher = User::findOrFail($id);
         $teachers = \App\Role::where('id', 2)->first()->roleUser()->pluck('name', 'id');
         $students = \App\Role::where('id', 3)->first()->roleUser()->pluck('name', 'id');
 
-        $user = \App\User::findOrFail($id);
 
-        return view('admin.classes.edit', compact('user', 'teachers', 'students'));
+        $courses = \App\Course::wherePublished(1)->get()->pluck('title', 'id');
+
+        return view('admin.classes.edit', compact('teachers', 'students', 'courses', 'teacher'));
     }
 
     /**
@@ -171,6 +177,22 @@ class ClassesController extends Controller
                 $entry->delete();
             }
         }
+    }
+
+    public static function classCode($prefix)
+    {
+        $getLatestCode = Classes::orderBy('created_at', 'desc')->first();
+        if(!$getLatestCode){
+            return $prefix.'0001';
+        }
+        $numb = substr($getLatestCode->class_code, -3);
+        $numb = $numb + 1;
+        $numb = str_pad($numb, 4, '0', STR_PAD_LEFT);
+
+        $newNumber = $prefix.$numb;
+
+        return $newNumber;
+
     }
 
 }
