@@ -99,6 +99,28 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::label('listening_files', 'Listening files', ['class' => 'control-label']) !!}
+                    {!! Form::file('listening_files[]', [
+                        'multiple',
+                        'class' => 'form-control file-upload',
+                        'data-url' => route('admin.media.upload'),
+                        'data-bucket' => 'listening_files',
+                        'data-filekey' => 'listening_files',
+                        ]) !!}
+                    <p class="help-block"></p>
+                    <div class="photo-block">
+                        <div class="progress-bar form-group">&nbsp;</div>
+                        <div class="files-list"></div>
+                    </div>
+                    @if($errors->has('listening_files'))
+                        <p class="help-block">
+                            {{ $errors->first('listening_files') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
                     {!! Form::label('downloadable_files', 'Downloadable files', ['class' => 'control-label']) !!}
                     {!! Form::file('downloadable_files[]', [
                         'multiple',
@@ -156,6 +178,7 @@
 
     <script src="{{ asset('adminlte/plugins/fileUpload/js/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/fileUpload/js/jquery.fileupload.js') }}"></script>
+
     <script>
         $(function () {
             $('.file-upload').each(function () {
@@ -171,10 +194,12 @@
                         _token: '{{ csrf_token() }}'
                     },
                     add: function (e, data) {
+                        console.log(data)
                         data.submit();
                     },
                     done: function (e, data) {
                         $.each(data.result.files, function (index, file) {
+
                             var $line = $($('<p/>', {class: "form-group"}).html(file.name + ' (' + file.size + ' KB)').appendTo($parent.find('.files-list')));
                             $line.append('<a href="#" class="btn btn-xs btn-danger remove-file">Remove</a>');
                             $line.append('<input type="hidden" name="' + $this.data('bucket') + '_id[]" value="' + file.id + '"/>');

@@ -18,6 +18,7 @@ use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
  * @property text $full_text
  * @property integer $position
  * @property string $downloadable_files
+ * @property string $listening_files
  * @property tinyInteger $free_lesson
  * @property tinyInteger $published
 */
@@ -25,7 +26,7 @@ class Lesson extends Model implements HasMedia
 {
     use SoftDeletes, HasMediaTrait;
 
-    protected $fillable = ['title', 'slug', 'lesson_image', 'short_text', 'full_text', 'position', 'downloadable_files', 'published', 'course_id', 'lesson_parent_id'];
+    protected $fillable = ['title', 'slug', 'lesson_image', 'short_text', 'full_text', 'position', 'downloadable_files', 'published', 'course_id', 'lesson_parent_id', 'listening_files'];
 
 
     /**
@@ -63,6 +64,11 @@ class Lesson extends Model implements HasMedia
     public function subLessons()
     {
         return $this->hasMany(Lesson::class, 'lesson_parent_id');
+    }
+
+    public function lessonParent()
+    {
+        return $this->belongsTo(Lesson::class, 'lesson_parent_id');
     }
 
 }

@@ -40,16 +40,20 @@
                             <td>{{ $lesson->position }}</td>
                         </tr>
                         <tr>
-                            <th>@lang('global.lessons.fields.downloadable-files')</th>
-                            <td> @foreach($lesson->getMedia('downloadable_files') as $media)
+                            <th>@lang('global.lessons.fields.listening-files')</th>
+                            <td> @foreach($lesson->getMedia('listening_files') as $media)
                                 <p class="form-group">
                                     <a href="{{ $media->getUrl() }}" target="_blank">{{ $media->name }} ({{ $media->size }} KB)</a>
                                 </p>
                             @endforeach</td>
                         </tr>
                         <tr>
-                            <th>@lang('global.lessons.fields.free-lesson')</th>
-                            <td>{{ Form::checkbox("free_lesson", 1, $lesson->free_lesson == 1 ? true : false, ["disabled"]) }}</td>
+                            <th>@lang('global.lessons.fields.downloadable-files')</th>
+                            <td> @foreach($lesson->getMedia('downloadable_files') as $media)
+                                <p class="form-group">
+                                    <a href="{{ $media->getUrl() }}" target="_blank">{{ $media->name }} ({{ $media->size }} KB)</a>
+                                </p>
+                            @endforeach</td>
                         </tr>
                         <tr>
                             <th>@lang('global.lessons.fields.published')</th>

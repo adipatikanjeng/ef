@@ -102,6 +102,36 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
+                    {!! Form::label('listening_files', 'Listening files', ['class' => 'control-label']) !!}
+                    {!! Form::file('listening_files[]', [
+                        'multiple',
+                        'class' => 'form-control file-upload',
+                        'data-url' => route('admin.media.upload'),
+                        'data-bucket' => 'listening_files',
+                        'data-filekey' => 'listening_files',
+                        ]) !!}
+                    <p class="help-block"></p>
+                    <div class="photo-block">
+                        <div class="progress-bar form-group">&nbsp;</div>
+                        <div class="files-list">
+                            @foreach($lesson->getMedia('listening_files') as $media)
+                                <p class="form-group">
+                                    <a href="{{ $media->getUrl() }}" target="_blank">{{ $media->name }} ({{ $media->size }} KB)</a>
+                                    <a href="#" class="btn btn-xs btn-danger remove-file">Remove</a>
+                                    <input type="hidden" name="listening_files_id[]" value="{{ $media->id }}">
+                                </p>
+                            @endforeach
+                        </div>
+                    </div>
+                    @if($errors->has('listening_files'))
+                        <p class="help-block">
+                            {{ $errors->first('listening_files') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
                     {!! Form::label('downloadable_files', 'Downloadable files', ['class' => 'control-label']) !!}
                     {!! Form::file('downloadable_files[]', [
                         'multiple',

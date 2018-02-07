@@ -58,7 +58,7 @@ class LessonsController extends Controller
             return abort(401);
         }
         $courses = \App\Course::ofTeacher()->get()->pluck('title', 'id')->prepend('Please select', '');
-        $lessons = Lesson::whereIn('course_id', Course::ofTeacher()->pluck('id'))->pluck('title', 'id');
+        $lessons = Lesson::whereIn('course_id', Course::ofTeacher()->pluck('id'))->where('lesson_parent_id', null)->pluck('title', 'id')->prepend('Select parent', '');
 
         return view('admin.lessons.create', compact('courses', 'lessons'));
     }
@@ -85,6 +85,13 @@ class LessonsController extends Controller
             $file->save();
         }
 
+        foreach ($request->input('listening_files_id', []) as $index => $id) {
+            $model          = config('laravel-medialibrary.media_model');
+            $file           = $model::find($id);
+            $file->model_id = $lesson->id;
+            $file->save();
+        }
+
         return redirect()->route('admin.lessons.index', ['course_id' => $request->course_id]);
     }
 
@@ -101,7 +108,7 @@ class LessonsController extends Controller
             return abort(401);
         }
         $courses = \App\Course::ofTeacher()->get()->pluck('title', 'id')->prepend('Please select', '');
-        $lessons = Lesson::whereIn('course_id', Course::ofTeacher()->pluck('id'))->pluck('title', 'id');
+        $lessons = Lesson::whereIn('course_id', Course::ofTeacher()->pluck('id'))->where('lesson_parent_id', null)->pluck('title', 'id')->prepend('Select parent', '');
         $lesson = Lesson::findOrFail($id);
 
         return view('admin.lessons.edit', compact('lesson', 'courses', 'lessons'));
@@ -125,6 +132,17 @@ class LessonsController extends Controller
 
 
         $media = [];
+        foreach ($request->input('listening_files_id', []) as $index => $id) {
+            $model          = config('laravel-medialibrary.media_model');
+            $file           = $model::find($id);
+            $file->model_id = $lesson->id;
+            $file->save();
+            $media[] = $file;
+        }
+
+        $lesson->updateMedia($media, 'listening_files');
+
+        $media = [];
         foreach ($request->input('downloadable_files_id', []) as $index => $id) {
             $model          = config('laravel-medialibrary.media_model');
             $file           = $model::find($id);
@@ -132,6 +150,7 @@ class LessonsController extends Controller
             $file->save();
             $media[] = $file;
         }
+
         $lesson->updateMedia($media, 'downloadable_files');
 
         return redirect()->route('admin.lessons.index', ['course_id' => $request->course_id]);

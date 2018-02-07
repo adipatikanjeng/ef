@@ -15,7 +15,7 @@ class AlterLessonsTable extends Migration
     {
 
         Schema::table('lessons', function (Blueprint $table) {
-            $table->integer('lesson_parent_id')->default(null)->after('course_id')->nullable();
+            $table->integer('lesson_parent_id')->unsigned()->after('course_id')->nullable();
         });
 
     }
@@ -27,6 +27,9 @@ class AlterLessonsTable extends Migration
      */
     public function down()
     {
-        $table->dropColumn('lesson_parent_id');
+
+        Schema::table('lessons', function (Blueprint $table) {
+            $table->dropColumn('lesson_parent_id');
+        });
     }
 }
