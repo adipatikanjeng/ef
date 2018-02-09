@@ -119,6 +119,7 @@ return [
 		'fields' => [
 			'question' => 'Question',
 			'question-image' => 'Question image',
+			'question-files' => 'Question files',
 			'score' => 'Score',
 		],
 	],
@@ -186,6 +187,7 @@ return [
 	'app_add_new' => 'Add new',
 	'app_are_you_sure' => 'Are you sure?',
 	'app_back_to_list' => 'Back to list',
+	'app_back' => 'Back',
 	'app_dashboard' => 'Dashboard',
 	'app_delete' => 'Delete',
 	'global_title' => 'English Friends',

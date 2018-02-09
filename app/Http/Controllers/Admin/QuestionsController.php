@@ -85,6 +85,13 @@ class QuestionsController extends Controller
             }
         }
 
+        foreach ($request->input('question_files_id', []) as $index => $id) {
+            $model          = config('laravel-medialibrary.media_model');
+            $file           = $model::find($id);
+            $file->model_id = $question->id;
+            $file->save();
+        }
+
         return redirect()->route('admin.questions.index');
     }
 

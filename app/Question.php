@@ -3,6 +3,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
 
 /**
  * Class Question
@@ -12,12 +14,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $question_image
  * @property integer $score
 */
-class Question extends Model
+class Question extends Model implements HasMedia
 {
-    use SoftDeletes;
+    use SoftDeletes, HasMediaTrait;
 
     protected $fillable = ['question', 'question_image', 'score'];
-    
+
 
     /**
      * Set attribute to money format
@@ -38,5 +40,5 @@ class Question extends Model
         return $this->belongsToMany(Test::class, 'question_test');
     }
 
-    
+
 }
