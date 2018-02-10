@@ -24,10 +24,14 @@ class StoreUsersRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'surname' => 'required',
+            'nickname' => 'required',
+            'phone_number' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'role' => 'required',
             'role.*' => 'exists:roles,id',
+            'course_id.*' => 'exists:courses,id',
         ];
     }
 }

@@ -43,9 +43,10 @@ class UsersController extends Controller
         if (! Gate::allows('user_create')) {
             return abort(401);
         }
-        $roles = \App\Role::get()->pluck('title', 'id');
+        $roles = \App\Role::get()->pluck('title', 'id')->prepend('Select role', '');
+        $courses = \App\Course::get()->pluck('title', 'id');
 
-        return view('admin.users.create', compact('roles'));
+        return view('admin.users.create', compact('roles', 'courses'));
     }
 
     /**
@@ -61,8 +62,7 @@ class UsersController extends Controller
         }
         $user = User::create($request->all());
         $user->role()->sync(array_filter((array)$request->input('role')));
-
-
+        $user->courses()->sync(array_filter((array)$request->input('course_id')));
 
         return redirect()->route('admin.users.index');
     }
@@ -79,11 +79,12 @@ class UsersController extends Controller
         if (! Gate::allows('user_edit')) {
             return abort(401);
         }
-        $roles = \App\Role::get()->pluck('title', 'id');
+        $roles = \App\Role::get()->pluck('title', 'id')->prepend('Select role', '');
+        $courses = \App\Course::get()->pluck('title', 'id');
 
         $user = User::findOrFail($id);
 
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit', compact('user', 'roles', 'courses'));
     }
 
     /**
@@ -101,6 +102,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         $user->update($request->all());
         $user->role()->sync(array_filter((array)$request->input('role')));
+        $user->courses()->sync(array_filter((array)$request->input('course_id')));
 
 
 
