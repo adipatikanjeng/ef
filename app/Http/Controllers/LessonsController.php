@@ -19,8 +19,8 @@ class LessonsController extends Controller
     public function show($course_id, $lesson_slug)
     {
         $lesson = Lesson::where('slug', $lesson_slug)->where('course_id', $course_id)->firstOrFail();
-        if($lesson->subLessons()->count() == 0){
-        \View::share('pageTitle', $lesson->course->title.' > '.$lesson->lessonParent->title.' > '.$lesson->title);
+        if($lesson->parent_losson_id != null){
+            \View::share('pageTitle', $lesson->course->title.' > '.$lesson->lessonParent->title.' > '.$lesson->title);
         }
 
         if (\Auth::check())
