@@ -54,4 +54,9 @@ class Test extends Model
         return $this->belongsToMany(Question::class, 'question_test')->withTrashed();
     }
 
+    public function results()
+    {
+        return $this->hasMany(\App\TestsResult::class);
+    }
+
 }

@@ -17,7 +17,7 @@
                     <tr>
 
                         <th>@lang('global.tests.fields.course')</th>
-                        <th>@lang('global.tests.fields.title')</th>
+
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
                         @else
@@ -27,19 +27,18 @@
                 </thead>
 
                 <tbody>
-                    @if (count($testHeaders) > 0)
-                        @foreach ($testHeaders as $testHeader)
-                            <tr data-entry-id="{{ $testHeader->id }}">
+                    @if (count($courses) > 0)
+                        @foreach ($courses as $course)
+                            <tr data-entry-id="{{ $course->id }}">
                                 @can('test_delete')
                                     @if ( request('show_deleted') != 1 )<td></td>@endif
                                 @endcan
 
-                                <td>{{ $testHeader->course->title or '' }}</td>
-                                <td>{{ Str::words($testHeader->title, '10', '...') }}</td>
+                                <td>{{ $course->title or '' }}</td>
 
                                 <td>
                                     @can('test_view')
-                                    <a href="{{ route('tests.show',[$testHeader->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
+                                    <a href="{{ route('tests.show',[$course->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
                                     @endcan
                                 </td>
 

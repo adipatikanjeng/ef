@@ -41,12 +41,14 @@ class TestsController extends Controller
 
     public function detail($courseId, $lessonId = null)
     {
-
-        if(!$lessonId){
-            $lesson = Lesson::where('course_id', $courseId)->where('id', $lessonId)->firstOrFail();
+        if($lessonId == 'null'){
+            $lesson = Lesson::where('course_id', $courseId)->whereHas('test', function ($query) use($courseId) {
+                $query->where('course_id', $courseId)->where('type', 'test');
+            })->firstOrFail();
         }else{
-            dd($courseId);
-            $lesson = Lesson::where('course_id', $courseId)->firstOrFail();
+            $lesson = Lesson::where('course_id', $courseId)->where('id', $lessonId)->whereHas('test', function ($query) {
+                $query->where('type', 'test');
+            })->firstOrFail();
         }
 
         if (\Auth::check())
@@ -65,10 +67,16 @@ class TestsController extends Controller
 
         $previous_lesson = Lesson::where('course_id', $lesson->course_id)
             ->where('position', '<', $lesson->position)
+            ->whereHas('test', function ($query) {
+                $query->where('type', 'test');
+            })
             ->orderBy('position', 'desc')
             ->first();
         $next_lesson = Lesson::where('course_id', $lesson->course_id)
             ->where('position', '>', $lesson->position)
+            ->whereHas('test', function ($query) {
+                $query->where('type', 'test');
+            })
             ->orderBy('position', 'asc')
             ->first();
 

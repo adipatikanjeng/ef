@@ -17,6 +17,7 @@ Route::post('courses/payment', ['uses' => 'CoursesController@payment', 'as' => '
 Route::post('courses/{course_id}/rating', ['uses' => 'CoursesController@rating', 'as' => 'courses.rating']);
 Route::get('tests', ['uses' => 'TestsController@index', 'as' => 'tests.index']);
 Route::get('tests/{id}', ['uses' => 'TestsController@show', 'as' => 'tests.show']);
+Route::get('tests/{courseId}/{lessonId}/lesson', ['uses' => 'TestsController@detail', 'as' => 'tests.detail']);
 
 Route::get('lesson/{course_id}/{slug}', ['uses' => 'LessonsController@show', 'as' => 'lessons.show']);
 Route::post('lesson/{slug}/test', ['uses' => 'LessonsController@test', 'as' => 'lessons.test']);
