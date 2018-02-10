@@ -41,11 +41,13 @@
                         </tr>
                         <tr>
                             <th>@lang('global.lessons.fields.listening-files')</th>
-                            <td> @foreach($lesson->getMedia('listening_files') as $media)
+                            <td>
+                            @foreach($lesson->getMedia('listening_files') as $media)
                                 <p class="form-group">
                                     <a href="{{ $media->getUrl() }}" target="_blank">{{ $media->name }} ({{ $media->size }} KB)</a>
                                 </p>
-                            @endforeach</td>
+                            @endforeach
+                            </td>
                         </tr>
                         <tr>
                             <th>@lang('global.lessons.fields.downloadable-files')</th>

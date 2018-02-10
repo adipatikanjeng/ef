@@ -45,36 +45,6 @@ class CoursesController extends Controller
         return view('courses.detail', compact('course', 'purchased_course'));
     }
 
-    public function payment(Request $request)
-    {
-        $course = Course::findOrFail($request->get('course_id'));
-        $this->createStripeCharge($request);
-
-        $course->students()->attach(\Auth::id());
-
-        return redirect()->back()->with('success', 'Payment completed successfully.');
-    }
-
-    private function createStripeCharge($request)
-    {
-        Stripe::setApiKey(env('STRIPE_API_KEY'));
-
-        try {
-            $customer = Customer::create([
-                'email' => $request->get('stripeEmail'),
-                'source'  => $request->get('stripeToken')
-            ]);
-
-            $charge = Charge::create([
-                'customer' => $customer->id,
-                'amount' => $request->get('amount'),
-                'currency' => "usd"
-            ]);
-        } catch (\Stripe\Error\Base $e) {
-            return redirect()->back()->withError($e->getMessage())->send();
-        }
-    }
-
     public function rating($course_id, Request $request)
     {
         $course = Course::findOrFail($course_id);

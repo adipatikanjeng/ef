@@ -12,9 +12,9 @@
                     @if(is_file(public_path('uploads/'.$course->course_image)))
                     <img src="/uploads/{{$course->course_image}}" class="img-responsive center-block">
                     <br> @endif
-                    <p>{{ $course->description }}</p> <a href="{{ route('courses.show', [$course->slug]) }}" class="btn btn-info m-t-10">Join</a>
+                    <p>{{ Str::words($course->description, 20, '....') }}</p> <a href="{{ route('courses.show', [$course->slug]) }}" class="btn btn-info m-t-10">Join</a>
                 </div>
-                <div class="panel-footer"> Panel Footer </div>
+                {{--  <div class="panel-footer"> Panel Footer </div>  --}}
             </div>
         </div>
     </div>
