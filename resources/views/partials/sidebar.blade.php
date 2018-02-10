@@ -85,14 +85,6 @@
                     </span>
                 </a>
                 <ul class="nav nav-second-level collapse treeview-menu">
-                    @can('test_header_access')
-                    <li class="{{ $request->segment(2) == 'test_headers' ? 'active' : '' }}">
-                        <a class="waves-effect {{ $request->segment(2) == 'test_headers' ? 'active' : '' }}" href="{{ route('admin.test_headers.index') }}">
-                            <i class="mdi mdi-format-header-1 fa-fw"></i>
-                            <span class="hide-menu">@lang('global.test-headers.title')</span>
-                        </a>
-                    </li>
-                    @endcan
                     @can('test_access')
                     <li class="{{ $request->segment(2) == 'tests' ? 'active' : '' }}">
                         <a class="waves-effect {{ $request->segment(2) == 'tests' ? 'active' : '' }}" href="{{ route('admin.tests.index') }}">

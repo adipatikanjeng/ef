@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Test;
 use App\TestHeader;
+use App\Course;
+use App\TestsResult;
 use Illuminate\Http\Request;
-use Stripe\Stripe;
+use App\Lesson;
 use Stripe\Charge;
 use Stripe\Customer;
 
@@ -25,45 +27,61 @@ class TestsController extends Controller
      */
     public function index()
     {
-        $testHeaders = TestHeader::where('published', 1)->orderBy('id', 'desc')->get();
-        return view('tests.index', compact('testHeaders'));
+        $courses = \Auth::user()->courses;
+        return view('tests.index', compact('courses'));
     }
 
     public function show($id)
     {
-        $testHeaders = TestHeader::where('id', $id)->firstOrFail();
+        $course = \Auth::user()->courses()->findOrFail($id);
+        $test = $course->test;
 
-        return view('tests.detail', compact('testHeaders'));
+        return view('tests.show', compact('test'));
     }
 
-    public function payment(Request $request)
+    public function detail($courseId, $lessonId = null)
     {
-        $course = Course::findOrFail($request->get('course_id'));
-        $this->createStripeCharge($request);
 
-        $course->students()->attach(\Auth::id());
-
-        return redirect()->back()->with('success', 'Payment completed successfully.');
-    }
-
-    private function createStripeCharge($request)
-    {
-        Stripe::setApiKey(env('STRIPE_API_KEY'));
-
-        try {
-            $customer = Customer::create([
-                'email' => $request->get('stripeEmail'),
-                'source'  => $request->get('stripeToken')
-            ]);
-
-            $charge = Charge::create([
-                'customer' => $customer->id,
-                'amount' => $request->get('amount'),
-                'currency' => "usd"
-            ]);
-        } catch (\Stripe\Error\Base $e) {
-            return redirect()->back()->withError($e->getMessage())->send();
+        if(!$lessonId){
+            $lesson = Lesson::where('course_id', $courseId)->where('id', $lessonId)->firstOrFail();
+        }else{
+            dd($courseId);
+            $lesson = Lesson::where('course_id', $courseId)->firstOrFail();
         }
+
+        if (\Auth::check())
+        {
+            if ($lesson->students()->where('id', \Auth::id())->count() == 0) {
+                $lesson->students()->attach(\Auth::id());
+            }
+        }
+
+        $test_result = NULL;
+        if ($lesson->test) {
+            $test_result = TestsResult::where('test_id', $lesson->test->id)
+                ->where('user_id', \Auth::id())
+                ->first();
+        }
+
+        $previous_lesson = Lesson::where('course_id', $lesson->course_id)
+            ->where('position', '<', $lesson->position)
+            ->orderBy('position', 'desc')
+            ->first();
+        $next_lesson = Lesson::where('course_id', $lesson->course_id)
+            ->where('position', '>', $lesson->position)
+            ->orderBy('position', 'asc')
+            ->first();
+
+        $test_exists = FALSE;
+
+        if ($lesson->test && $lesson->test->questions->count() > 0) {
+            $test_exists = TRUE;
+        }
+
+
+
+        return view('tests.detail', compact('lesson', 'previous_lesson', 'next_lesson', 'test_result',
+            'test_exists'));
     }
 
     public function rating($course_id, Request $request)

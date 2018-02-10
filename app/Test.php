@@ -18,8 +18,8 @@ class Test extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'published', 'course_id', 'lesson_id'];
-    
+    protected $fillable = ['title', 'description', 'published', 'course_id', 'lesson_id', 'test_duration', 'type'];
+
 
     /**
      * Set to null if empty
@@ -38,20 +38,20 @@ class Test extends Model
     {
         $this->attributes['lesson_id'] = $input ? $input : null;
     }
-    
+
     public function course()
     {
         return $this->belongsTo(Course::class, 'course_id')->withTrashed();
     }
-    
+
     public function lesson()
     {
         return $this->belongsTo(Lesson::class, 'lesson_id')->withTrashed();
     }
-    
+
     public function questions()
     {
         return $this->belongsToMany(Question::class, 'question_test')->withTrashed();
     }
-    
+
 }

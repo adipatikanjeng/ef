@@ -32,7 +32,6 @@ class UpdateUsersRequest extends FormRequest
             'surname' => 'required',
             'nickname' => 'required',
             'phone_number' => 'required',
-            'password' => 'required',
             'course_id.*' => 'exists:courses,id',
         ];
     }

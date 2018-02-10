@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.tests.title')</h3>
-    
+
     {!! Form::model($test, ['method' => 'PUT', 'route' => ['admin.tests.update', $test->id]]) !!}
 
     <div class="panel panel-default">
@@ -59,6 +58,30 @@
                     @endif
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('type', 'Type', ['class' => 'control-label']) !!}
+                    {!! Form::select('type', ['test' => 'Test', 'course' => 'Course'], old('type'), ['class' => 'form-control select2']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('type'))
+                        <p class="help-block">
+                            {{ $errors->first('type') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    {!! Form::label('test_duration', 'Test Duration (minutes)', ['class' => 'control-label']) !!}
+                    {!! Form::text('test_duration', old('test_duration'), ['class' => 'form-control', 'placeholder' => '']) !!}
+                    <p class="help-block"></p>
+                    @if($errors->has('test_duration'))
+                        <p class="help-block">
+                            {{ $errors->first('test_duration') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-xs-12 form-group">
@@ -73,7 +96,7 @@
                     @endif
                 </div>
             </div>
-            
+
         </div>
     </div>
 

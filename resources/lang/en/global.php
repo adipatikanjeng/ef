@@ -144,6 +144,8 @@ return [
 			'description' => 'Description',
 			'questions' => 'Questions',
 			'published' => 'Published',
+			'duration' => 'Test Duration',
+			'type' => 'Test Type'
 		],
 	],
 
