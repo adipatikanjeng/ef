@@ -34,9 +34,9 @@
             <p>&nbsp;</p>
 
             <a href="{{ route('tests.index') }}" class="btn btn-default">@lang('global.app_back')</a>
-            @if(!$test->results()->where('user_id', auth::user()->id)->count())
+            {{-- @if(!$test->results()->where('user_id', auth::user()->id)->count()) --}}
                 <a href="{{ url('tests/'.$test->course_id.'/null/lesson')}}" class="btn btn-success">Start Test</a>
-            @endif
+            {{-- @endif --}}
 
         </div>
     </div>

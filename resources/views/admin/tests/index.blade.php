@@ -30,7 +30,6 @@
                         <th>@lang('global.tests.fields.description')</th>
                         <th>@lang('global.tests.fields.questions')</th>
                         <th>@lang('global.tests.fields.published')</th>
-                        <th>@lang('global.tests.fields.duration')</th>
                         <th>@lang('global.tests.fields.type')</th>
                         @if( request('show_deleted') == 1 )
                         <th>&nbsp;</th>
@@ -54,7 +53,6 @@
                                 <td>{!! $test->description !!}</td>
                                 <td>{{ $test->questions->count() }}</td>
                                 <td>{{ Form::checkbox("published", 1, $test->published == 1 ? true : false, ["disabled"]) }}</td>
-                                <td>{!! $test->test_duration !!}</td>
                                 <td>{!! $test->type !!}</td>
                                 @if( request('show_deleted') == 1 )
                                 <td>

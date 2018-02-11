@@ -14,8 +14,7 @@ class AlterTestsTable extends Migration
     public function up()
     {
         Schema::table('tests', function (Blueprint $table) {
-            $table->integer('test_duration')->unsigned()->after('description')->nullable();
-            $table->enum('type', ['course', 'test'])->after('test_duration');
+            $table->enum('type', ['test', 'course'])->after('description');
         });
     }
 
@@ -27,7 +26,6 @@ class AlterTestsTable extends Migration
     public function down()
     {
         Schema::table('tests', function (Blueprint $table) {
-            $table->dropColumn('test_duration');
             $table->dropColumn('type');
         });
     }

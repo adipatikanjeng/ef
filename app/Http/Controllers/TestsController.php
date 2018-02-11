@@ -82,7 +82,7 @@ class TestsController extends Controller
 
         $test_exists = FALSE;
 
-        if ($lesson->test && $lesson->test->questions->count() > 0) {
+        if ($lesson->test->type == 'test' && $lesson->test->questions->count() > 0) {
             $test_exists = TRUE;
         }
 

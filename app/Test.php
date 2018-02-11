@@ -18,7 +18,7 @@ class Test extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'published', 'course_id', 'lesson_id', 'test_duration', 'type'];
+    protected $fillable = ['title', 'description', 'published', 'course_id', 'lesson_id', 'type'];
 
 
     /**

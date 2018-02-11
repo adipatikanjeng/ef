@@ -72,18 +72,6 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('test_duration', 'Test Duration (minutes)', ['class' => 'control-label']) !!}
-                    {!! Form::text('test_duration', old('test_duration'), ['class' => 'form-control', 'placeholder' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('test_duration'))
-                        <p class="help-block">
-                            {{ $errors->first('test_duration') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
                     {!! Form::label('published', 'Published', ['class' => 'control-label']) !!}
                     {!! Form::hidden('published', 0) !!}
                     {!! Form::checkbox('published', 1, false, []) !!}

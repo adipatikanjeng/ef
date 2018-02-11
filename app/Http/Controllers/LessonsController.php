@@ -31,10 +31,11 @@ class LessonsController extends Controller
         }
 
         $test_result = NULL;
-        if ($lesson->test) {
+        if ($lesson->test && $lesson->test->type == 'course') {
             $test_result = TestsResult::where('test_id', $lesson->test->id)
                 ->where('user_id', \Auth::id())
                 ->first();
+
         }
 
         $previous_lesson = Lesson::where('course_id', $lesson->course_id)
@@ -50,7 +51,8 @@ class LessonsController extends Controller
 
         $purchased_course = $lesson->course->students()->where('user_id', \Auth::id())->count() > 0;
         $test_exists = FALSE;
-        if ($lesson->test && $lesson->test->questions->count() > 0) {
+
+        if ($lesson->test && $lesson->test->type == 'course' && $lesson->test->questions->count() > 0) {
             $test_exists = TRUE;
         }
 
