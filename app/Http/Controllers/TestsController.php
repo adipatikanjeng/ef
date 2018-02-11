@@ -46,7 +46,8 @@ class TestsController extends Controller
                 $query->where('course_id', $courseId)->where('type', 'test');
             })->firstOrFail();
         }else{
-            $lesson = Lesson::where('course_id', $courseId)->where('id', $lessonId)->whereHas('test', function ($query) {
+            $lesson = Lesson::where('course_id', $courseId)->where('id', $lessonId)
+            ->whereHas('test', function ($query) {
                 $query->where('type', 'test');
             })->firstOrFail();
         }
@@ -82,7 +83,7 @@ class TestsController extends Controller
 
         $test_exists = FALSE;
 
-        if ($lesson->test->type == 'test' && $lesson->test->questions->count() > 0) {
+        if ($lesson->test && $lesson->test->questions->count() > 0) {
             $test_exists = TRUE;
         }
 

@@ -18,7 +18,12 @@ class LessonsController extends Controller
 
     public function show($course_id, $lesson_slug)
     {
-        $lesson = Lesson::where('slug', $lesson_slug)->where('course_id', $course_id)->firstOrFail();
+        $lesson = Lesson::where('slug', $lesson_slug)
+            ->where('course_id', $course_id)
+            ->whereHas('test', function ($query) {
+                $query->where('type', 'course');
+            })
+            ->firstOrFail();
         if($lesson->parent_losson_id != null){
             \View::share('pageTitle', $lesson->course->title.' > '.$lesson->lessonParent->title.' > '.$lesson->title);
         }
@@ -31,7 +36,7 @@ class LessonsController extends Controller
         }
 
         $test_result = NULL;
-        if ($lesson->test && $lesson->test->type == 'course') {
+        if ($lesson->test) {
             $test_result = TestsResult::where('test_id', $lesson->test->id)
                 ->where('user_id', \Auth::id())
                 ->first();
@@ -52,7 +57,7 @@ class LessonsController extends Controller
         $purchased_course = $lesson->course->students()->where('user_id', \Auth::id())->count() > 0;
         $test_exists = FALSE;
 
-        if ($lesson->test && $lesson->test->type == 'course' && $lesson->test->questions->count() > 0) {
+        if ($lesson->test && $lesson->test->questions->count() > 0) {
             $test_exists = TRUE;
         }
 
